@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import LoginPresenter from './LoginPresenter';
 import * as c from '../../config/config';
 import { userApi } from '../../api/api';
+import * as recoilItem from '../../util/recoilItem';
 
 const LoginContainer = ({}) => {
+    const navigate = useNavigate();
     const { naver } = window;
-    const [token, setToken] = useState('');
+
+
+    const [token, setToken] = useRecoilState(recoilItem.access_token);
+    const [state, setState] = useRecoilState(recoilItem.state_token);
+    
     const location = useLocation();
     const initializeNaverLogin = () => {
         const naverLogin = new naver.LoginWithNaverId({
@@ -24,19 +30,48 @@ const LoginContainer = ({}) => {
             code: code,
             state: state
         };
-
         try{
             res = await userApi.login(formData);
         } catch(e){}
         finally{
-            if(res){
-                console.log("가입 완료");
-            }
-            else{
+            console.log();
+            if (res.status === 200) {
+                setToken(token);
+                setState(state);
+                navigate("/main");
+
+            } else {
+                setToken('');
+                setState('');
                 console.log('error');
             }
         }
     }
+
+    const TokenCheck = async () => {
+        if (token == '' || !token || state == '' || !state) {
+            return;
+        } else {
+            let res = null;
+            let form = {
+                code: token,
+                state: token,
+            };
+            res = await userApi.login(form);
+
+            if (res) {
+                if (res.data == '') {
+                    localStorage.clear();
+                    return;
+                } else {
+                    navigate('/main');
+                }
+            }
+        }
+    };
+    useEffect(() => {
+        TokenCheck();
+    }, []);
 
     useEffect(() => {
         initializeNaverLogin();
@@ -47,21 +82,19 @@ const LoginContainer = ({}) => {
         if (!location.hash) return;
         
         //code 추출
-        setToken(location.hash.split('=')[1].split('&')[0]);
-        
+        let code = location.hash.split('=')[1].split('&')[0];
+      
         let params = new URLSearchParams(window.location.href);
         //state 추출
         let state = params.get("state");
-        if (token === '' || state === '') return;
-        console.log(token, state);
-        Join(token, state);
+        
+        if (code === '' || state === '') return;
+        Join(code, state);
 
     })
     
     return (
-        <LoginPresenter
-
-        />
+        <LoginPresenter/>
     );
 };
 

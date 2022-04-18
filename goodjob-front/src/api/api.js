@@ -4,3 +4,4 @@ import { loginedApi, notLoginedApi } from "./api-base";
 export const userApi = {
     login: (Data) => notLoginedApi.post(`/user/register`, Data),
 };
+    
