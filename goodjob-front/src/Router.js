@@ -16,7 +16,7 @@ export default ({match, location}) => {
             <RouterDivision>
                 <Routes>
                     <Route path="/" element={<Login/>}></Route>
-                    <Route path = "/naver" element = {<NaverLogin/>}></Route>
+                    <Route path = "/callback" element = {<Login/>}></Route>
                 </Routes>
             </RouterDivision>
         </BrowserRouter>
