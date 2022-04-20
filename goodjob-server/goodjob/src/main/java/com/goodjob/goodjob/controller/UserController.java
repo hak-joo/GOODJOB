@@ -24,7 +24,13 @@ public class UserController {
     @PostMapping("/register")
     public User register(@RequestBody LoginDto loginDto){
         userDto = userService.getNaverProfile(loginDto);
-        User user = userService.register(userDto);
+        if(userDto == null){
+            return null;
+        }
+        User user = userRepository.findByEmail(userDto.getEmail()).orElse(null);
+        if(user == null) {
+            user = userService.register(userDto);
+        }
         return user;
     }
 
