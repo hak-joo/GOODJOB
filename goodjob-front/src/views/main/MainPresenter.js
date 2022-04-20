@@ -3,11 +3,11 @@ import * as s from './MainStyled';
 
 const MainPresenter = ({...props}) => {
     const {userData} = props;
-    console.log(userData);
     return(
-        <div>
-            hello           
-        </div>
+        <s.Container>
+            hello
+        </s.Container>
+
     );
 }
 

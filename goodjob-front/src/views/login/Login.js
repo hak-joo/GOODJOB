@@ -34,11 +34,12 @@ const LoginContainer = ({}) => {
             res = await userApi.login(formData);
         } catch(e){}
         finally{
-            console.log();
             if (res.status === 200) {
-                setToken(token);
+                setToken(code);
                 setState(state);
+                console.log("login", token, state);
                 navigate("/main");
+
 
             } else {
                 setToken('');
@@ -89,9 +90,10 @@ const LoginContainer = ({}) => {
         let state = params.get("state");
         
         if (code === '' || state === '') return;
+        console.log(code, state)
         Join(code, state);
 
-    })
+    }, [])
     
     return (
         <LoginPresenter/>
