@@ -5,7 +5,9 @@ const MainPresenter = ({...props}) => {
     const {userData} = props;
     return(
         <s.Container>
-            hello
+            <s.MainBlock>
+                Test
+            </s.MainBlock>
         </s.Container>
 
     );

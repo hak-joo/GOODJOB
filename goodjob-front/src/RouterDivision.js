@@ -4,7 +4,9 @@ export const RouterDivision = styled.div`
     display: flex;
     flex-direction: row;
     text-align: center;
-    width: 100%;
+    width: 100%;   
+    background-color: #f2f2f2;
+
     @media screen and (min-width: 1180px) {
         min-width: 100%;
     }
@@ -14,6 +16,6 @@ export const RouterDivision = styled.div`
     }
 `;
 
-export const widthDiv = styled.div`
+export const WidthDiv = styled.div`
     width: 100%;
 `;
