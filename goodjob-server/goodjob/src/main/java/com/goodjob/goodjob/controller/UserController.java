@@ -11,6 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
+
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -21,8 +23,8 @@ public class UserController {
     private final UserRepository userRepository;
     private UserDto userDto;
 
-    @PostMapping("/register")
-    public User register(@RequestBody LoginDto loginDto){
+    @PostMapping("/login")
+    public User login(@RequestBody LoginDto loginDto){
         userDto = userService.getNaverProfile(loginDto);
         if(userDto == null){
             return null;
@@ -32,6 +34,20 @@ public class UserController {
             user = userService.register(userDto);
         }
         return user;
+    }
+
+    @PostMapping("/getuser")
+    public User getUser(@RequestBody LoginDto loginDto){
+        userDto = userService.getNaverProfile(loginDto);
+        if(userDto == null){
+            return null;
+        }
+        User user = userRepository.findByEmail(userDto.getEmail()).orElse(null);
+        if(user == null){
+            return null;
+        } else{
+            return user;
+        }
     }
 
 }

@@ -64,7 +64,7 @@ public class UserService {
                         .id(jsonObject.get("response").getAsJsonObject().get("id").getAsString())
                         .name(jsonObject.get("response").getAsJsonObject().get("name").getAsString())
                         .gender(jsonObject.get("response").getAsJsonObject().get("gender").getAsString())
-                        .birthyear(jsonObject.get("response").getAsJsonObject().get("gender").getAsString())
+                        .birthyear(jsonObject.get("response").getAsJsonObject().get("birthyear").getAsString())
                         .birthday(jsonObject.get("response").getAsJsonObject().get("birthday").getAsString())
                         .email(jsonObject.get("response").getAsJsonObject().get("email").getAsString())
                         .build();

@@ -16,6 +16,7 @@ public class User {
     private String birthday;
     private String birthyear;
     private String email;
+    private String job_group;
 
     private int welfare;
     private int pay;
