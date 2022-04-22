@@ -16,7 +16,7 @@ export const Wrapper = styled.div`
 export const Container = styled.div`
     width: 50%;
     height: 50%;
-    border: 2px solid #6dc4db;
+    border: 2px solid #3cb371;
 
     display: flex;
     flex-direction: column;
@@ -31,7 +31,7 @@ export const Logo = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #6dc4db;
+    color: #3cb371;
 `;
 
 export const DescriptionArea = styled.div`
@@ -40,7 +40,7 @@ export const DescriptionArea = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #6dc4db;
+    color: #3cb371;
     font-size: 100%;
     font-weight: bold;
 `;
@@ -50,7 +50,7 @@ export const LoginButton = styled.div`
     font-size: 100%;
     font-weight: bold;
     width: 65%;
-    background-color: #6DC4DB;
+    background-color: #3cb371;
     border-radius: 5px;
     color: white;
     display: flex;

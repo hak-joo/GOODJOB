@@ -18,9 +18,9 @@ const LoginContainer = ({}) => {
     const initializeNaverLogin = () => {
         const naverLogin = new naver.LoginWithNaverId({
             clientId: c.NAVER_CLIENT_ID,
-            callbackUrl: c.BASE_URL +"/callback",
+            callbackUrl: c.BASE_URL + '/callback',
             isPopup: false,
-            loginButton: { color: 'white', type: 3, height: 50 },
+            loginButton: { color: '#3cb371', type: 3, height: 50 },
         });
         naverLogin.init();
     };

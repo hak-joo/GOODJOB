@@ -3,9 +3,9 @@ import styled from 'styled-components';
 
 export const DropDownMenuCorp = styled.div`
     background-color: white;
-
+    height: 1000px;
     min-width: 300px;
-    min-height: 700px;
+    min-height: 600px;
 
     display: inline-block;
     
@@ -69,19 +69,10 @@ export const SideMenuButton = styled.div`
 `;
 
 export const SideBody = styled.div`
-
-    display: flex;
-    justify-self: center;
-    align-items: center;
-    flex-direction: column;
-    height: 100%;
-`;
-export const WhiteSpace = styled.div`
-    flex: 0.1;
-    height: 100px;
+ 
 `;
 export const ProfileBlock = styled.div`
-    flex: 1;
+    padding-top: 40px;
     width: 100%;
     flex-direction:column;
     justify-content: center;
@@ -96,7 +87,7 @@ export const ProfileUserName = styled.div`
 `;
 
 export const JobGroupBlock = styled.div`
-    flex: 1;
+    padding: 20px;
     width: 100%;
     border-bottom: 5px solid white;
     display: flex;
@@ -107,6 +98,7 @@ export const JobGroupBlock = styled.div`
 export const JobGroupTitle = styled.div`
     font-size: 20px;
     color: #1e2f68;
+    padding: 10px;
 `;
 
 export const JobGroupSelect = styled.div`
@@ -116,3 +108,45 @@ export const JobGroupSelect = styled.div`
 
 // 드롭다운 메뉴
 
+
+export const PreferBlock = styled.div`
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+`;
+
+export const PreferTitle = styled.div`
+    padding: 10px;
+    border-top: 1px solid #e2e2e2;
+    border-bottom: 1px solid #e2e2e2;
+    width: 100%;
+    font-size: 20px;
+    color: #1e2f68;
+`;
+
+export const PreferItemWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    font-size: 20;
+
+`;
+export const PreferItem = styled.div`
+    padding-top: 20px;
+    display: flex;
+`;
+export const PreferIndex = styled.div`
+    flex:0.5;
+    text-align: right;
+`;
+export const PreferName = styled.div`
+    flex: 1;
+    text-align: center;
+`;
+
+export const PreferDownButton = styled.div`
+    flex: 0.5;
+    cursor: pointer;
+`;

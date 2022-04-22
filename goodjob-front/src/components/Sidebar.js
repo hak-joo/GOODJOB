@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
-import * as s from './SidebarStyled';
-import { IoPersonCircle } from 'react-icons/io5';
-import { BiX } from 'react-icons/bi';
 import {HiUserCircle} from 'react-icons/hi';
-import { Link } from 'react-router-dom';
-import { AiOutlineArrowLeft } from 'react-icons/ai';
+import { AiOutlineArrowLeft, AiFillCaretDown } from 'react-icons/ai';
+
 import * as recoilItem from '../util/recoilItem';
+import * as s from './SidebarStyled';
 import { useRecoilValue } from 'recoil';
 import { userApi } from '../api/api';
 import { useNavigate } from 'react-router-dom';
@@ -52,6 +50,26 @@ const Sidebar = ({...props}) => {
             finally{
                 if (res) {
                     setUserData(res.data);
+                    if(res.data.prefer.culture + res.data.prefer.pay == 0){
+                        setPreferList([
+                            { title: '문화', rank: 0, name:'culture' },
+                            { title: '급여', rank: 1, name: 'pay'},
+                            { title: '업무강도', rank: 2, name:'task'},
+                            { title: '복지', rank: 3, name:'welfare'},
+                            { title: '출퇴근', rank: 4, name:'commute'},
+                        ]);
+                    } else {
+                        setPreferList([
+                            { title: '문화', id: res.data.prefer.culture, name: 'culture' },
+                            { title: '급여', id: res.data.prefer.pay, name: 'pay' },
+                            { title: '업무강도', id: res.data.prefer.task, name: 'task' },
+                            { title: '복지', id: res.data.prefer.welfare, name: 'welfare' },
+                            { title: '출퇴근', id: res.data.prefer.commute, name: 'commute' },
+                        ]);
+                        preferList.sort();
+                        console.log(preferList)
+                    }
+                    
                 } 
             }
             
@@ -59,6 +77,7 @@ const Sidebar = ({...props}) => {
     }
     useEffect(() => {
         fetchData();
+        jobGroupList.sort();
     }, []);
 
     const jobGroupList = [
@@ -80,9 +99,23 @@ const Sidebar = ({...props}) => {
         { value: '전문직', label: '전문직' },
         { value: '기타', label: '기타' },
         { value: '교육', label: '교육' },
+        { value: '법률/법무', label: '법률/법무' },
+        { value: '유통/무역', label: '유통/무역' }
     ];
 
-    jobGroupList.sort();
+    const [preferList, setPreferList] = useState([]);
+    
+    const onClickDown = (index:number) => {
+        let tempArray = preferList;
+        let temp = preferList[index];
+        tempArray.splice(index,1);
+        tempArray.splice(index+1,0,temp);
+        tempArray.map((item, index) => {
+            item.rank = index;
+        })
+        setPreferList(Array.from(tempArray));
+        console.log(preferList);
+    }
 
     return (
         <>
@@ -101,13 +134,14 @@ const Sidebar = ({...props}) => {
                         </s.NavIconArea>
                     </s.SideTopPadding>
                     <s.SideBody>
-                        <s.WhiteSpace/>
+
                         <s.ProfileBlock>
                             <HiUserCircle size="70" color="#3cb371" />
                             <s.ProfileUserName>{userData.name}</s.ProfileUserName>
                             {userData.gender === 'M' ? '남' : '여'} / {userData.job_group ? userData.job_group : '직군미정'}
                         </s.ProfileBlock>
 
+                        {/* 직군 */}
                         <s.JobGroupBlock>
                             <s.JobGroupTitle>직군</s.JobGroupTitle>
                             <s.JobGroupSelect>
@@ -119,12 +153,30 @@ const Sidebar = ({...props}) => {
                                             label: job.label,
                                         };
                                     })}
+                                    menuPosition="absolute"
                                     menuPortalTarget={document.body}
                                     onChange={onChangeJobGroup}
                                 />
                             </s.JobGroupSelect>
                         </s.JobGroupBlock>
+
+                        {/* 선호도 선택 */}
+                        <s.PreferBlock>
+                            <s.PreferTitle>우선순위 할당</s.PreferTitle>
+                            <s.PreferItemWrapper>
+                                {preferList.map((item, index) => (
+                                    <s.PreferItem>
+                                        <s.PreferIndex>{index + 1}</s.PreferIndex>
+                                        <s.PreferName>{item.title}</s.PreferName>
+                                        <s.PreferDownButton>
+                                            <AiFillCaretDown onClick={() => onClickDown(index)}>밑으로 내리기</AiFillCaretDown>
+                                        </s.PreferDownButton>
+                                    </s.PreferItem>
+                                ))}
+                            </s.PreferItemWrapper>
+                        </s.PreferBlock>
                     </s.SideBody>
+
                 </s.DropDownMenuCorp>
             ) : null}
         </>
