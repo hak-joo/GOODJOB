@@ -4,9 +4,13 @@ export const RouterDivision = styled.div`
     display: flex;
     flex-direction: row;
     text-align: center;
-    width: 100%;   
+    width: 100%;
     background-color: #f2f2f2;
     height: 950px;
+
+    @media screen and (max-height: 767px) {
+        height: 850px;
+    }
 
     @media screen and (min-width: 1180px) {
         min-width: 100%;

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const DropDownMenuCorp = styled.div`
     background-color: white;
-    height: 1000px;
+    height: 100%;
     min-width: 300px;
     min-height: 600px;
 
@@ -69,10 +69,20 @@ export const SideMenuButton = styled.div`
 `;
 
 export const SideBody = styled.div`
- 
+    height: 90%;
+    display: flex;
+    flex-direction: column;
 `;
+
+export const SideBodyTop = styled.div`
+    flex: 0.5;
+    width: 100%;
+    text-align: right;  
+    padding: 20px;
+`;
+
 export const ProfileBlock = styled.div`
-    padding-top: 40px;
+    flex: 2;
     width: 100%;
     flex-direction:column;
     justify-content: center;
@@ -87,7 +97,7 @@ export const ProfileUserName = styled.div`
 `;
 
 export const JobGroupBlock = styled.div`
-    padding: 20px;
+    flex: 2;
     width: 100%;
     border-bottom: 5px solid white;
     display: flex;
@@ -110,7 +120,8 @@ export const JobGroupSelect = styled.div`
 
 
 export const PreferBlock = styled.div`
-    padding: 20px;
+    flex: 4;
+
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -149,4 +160,47 @@ export const PreferName = styled.div`
 export const PreferDownButton = styled.div`
     flex: 0.5;
     cursor: pointer;
+`;
+
+export const SaveBlock = styled.div`
+    flex: 1;
+
+    width: 100%;
+    justify-content: right;
+    align-items: flex-end;
+    display: flex;
+    padding: 20px;
+`;
+
+export const SaveButton = styled.button`
+    width: 30%;
+    height: 50%;
+    font-size: 90%;
+    margin: 5px;
+    border-radius: 5px;
+    border: none;
+    background-color: #3cb371;
+    color: white;
+    cursor: pointer;
+    &:hover{
+        font-weight: bolder;
+        opacity: 0.9;
+    }
+
+`;
+
+export const ResetButton = styled.button`
+    width: 30%;
+    height: 50%;
+    font-size: 90%;
+    margin: 5px;
+    border-radius: 5px;
+    border: none;
+    background-color: #e2e2e2;
+    color: white;
+    cursor: pointer;
+    &:hover {
+        font-weight: bolder;
+        opacity: 0.9;
+    }
 `;

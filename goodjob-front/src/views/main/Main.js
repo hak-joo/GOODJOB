@@ -10,7 +10,11 @@ const Main = ({...props}) => {
     const [userData, setUserData] = useState(null);
     const token = useRecoilValue(recoilItem.access_token);
     const state = useRecoilValue(recoilItem.state_token);
-   
+    useEffect(() => {
+        if(token == "" || token ==null || state =="" || state == null){
+            navigate("/");
+        }
+    }, []);
     return(
         <MainPresenter
             userData = {props.data}

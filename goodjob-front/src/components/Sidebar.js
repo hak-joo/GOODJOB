@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
 import {HiUserCircle} from 'react-icons/hi';
 import { AiOutlineArrowLeft, AiFillCaretDown } from 'react-icons/ai';
+import {FiLogOut} from 'react-icons/fi';
 
 import * as recoilItem from '../util/recoilItem';
 import * as s from './SidebarStyled';
@@ -11,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Sidebar = ({...props}) => {
+    //Navigation Management
     const [navColor, setNavColor] = useState('#ffffff');
      const onMouseOverNav = () => {
          setNavColor('#d5d3d3');
@@ -18,45 +20,40 @@ const Sidebar = ({...props}) => {
      const onMouseOutNav = () => {
          setNavColor('#ffffff');
      };
+    const navigate = useNavigate();
+
+    //fetch, token
     const token = useRecoilValue(recoilItem.access_token);
     const state = useRecoilValue(recoilItem.state_token);
-    const [jobGroup, setJobGroup] = useState("금융/재무");
+    
     const [userData, setUserData] = useState(null);
-    const navigate = useNavigate();
-    const onChangeJobGroup = (e) =>{
-        setJobGroup(e.value);
-    }
-    const fetchData = async() => {
-        
-        if(!token || !state){
+    const fetchData = async () => {
+        if (!token || !state) {
             localStorage.clear();
             return;
-        } else{
+        } else {
             const formData = {
                 code: token,
                 state: state,
             };
             let res = null;
-            
-            try{
+
+            try {
                 res = await userApi.getUser(formData);
                 console.log(res);
-            }
-            catch(e) {
-
-                alert("잘못된 접근입니다.");
+            } catch (e) {
+                alert('잘못된 접근입니다.');
                 navigate('/');
-            }
-            finally{
+            } finally {
                 if (res) {
                     setUserData(res.data);
-                    if(res.data.prefer.culture + res.data.prefer.pay == 0){
+                    if (res.data.prefer.culture + res.data.prefer.pay == 0) {
                         setPreferList([
-                            { title: '문화', rank: 0, name:'culture' },
-                            { title: '급여', rank: 1, name: 'pay'},
-                            { title: '업무강도', rank: 2, name:'task'},
-                            { title: '복지', rank: 3, name:'welfare'},
-                            { title: '출퇴근', rank: 4, name:'commute'},
+                            { title: '문화', rank: 0, name: 'culture' },
+                            { title: '급여', rank: 1, name: 'pay' },
+                            { title: '업무강도', rank: 2, name: 'task' },
+                            { title: '복지', rank: 3, name: 'welfare' },
+                            { title: '출퇴근', rank: 4, name: 'commute' },
                         ]);
                     } else {
                         setPreferList([
@@ -67,19 +64,26 @@ const Sidebar = ({...props}) => {
                             { title: '출퇴근', id: res.data.prefer.commute, name: 'commute' },
                         ]);
                         preferList.sort();
-                        console.log(preferList)
+                        console.log(preferList);
                     }
-                    
-                } 
+                }
             }
-            
         }
-    }
+    };
     useEffect(() => {
         fetchData();
         jobGroupList.sort();
     }, []);
-
+    const onClickLogout = () => {
+        localStorage.clear();
+        navigate("/");
+    }
+    
+    // job
+    const [jobGroup, setJobGroup] = useState('금융/재무');
+    const onChangeJobGroup = (e) =>{
+        setJobGroup(e.value);
+    }
     const jobGroupList = [
         { value: '생산관리/품질관리', label: '생산관리/품질관리' },
         { value: '경영/기획/컨설팅', label: '경영/기획/컨설팅' },
@@ -103,8 +107,8 @@ const Sidebar = ({...props}) => {
         { value: '유통/무역', label: '유통/무역' }
     ];
 
+    // prefer
     const [preferList, setPreferList] = useState([]);
-    
     const onClickDown = (index:number) => {
         let tempArray = preferList;
         let temp = preferList[index];
@@ -114,7 +118,6 @@ const Sidebar = ({...props}) => {
             item.rank = index;
         })
         setPreferList(Array.from(tempArray));
-        console.log(preferList);
     }
 
     return (
@@ -134,7 +137,9 @@ const Sidebar = ({...props}) => {
                         </s.NavIconArea>
                     </s.SideTopPadding>
                     <s.SideBody>
-
+                        <s.SideBodyTop>
+                            <FiLogOut size={30} color="#3cb371" onClick={onClickLogout} />
+                        </s.SideBodyTop>
                         <s.ProfileBlock>
                             <HiUserCircle size="70" color="#3cb371" />
                             <s.ProfileUserName>{userData.name}</s.ProfileUserName>
@@ -169,14 +174,17 @@ const Sidebar = ({...props}) => {
                                         <s.PreferIndex>{index + 1}</s.PreferIndex>
                                         <s.PreferName>{item.title}</s.PreferName>
                                         <s.PreferDownButton>
-                                            <AiFillCaretDown onClick={() => onClickDown(index)}>밑으로 내리기</AiFillCaretDown>
+                                            <AiFillCaretDown onClick={() => onClickDown(index)} />
                                         </s.PreferDownButton>
                                     </s.PreferItem>
                                 ))}
                             </s.PreferItemWrapper>
                         </s.PreferBlock>
+                        <s.SaveBlock>
+                            <s.ResetButton>초기화</s.ResetButton>
+                            <s.SaveButton>저장</s.SaveButton>
+                        </s.SaveBlock>
                     </s.SideBody>
-
                 </s.DropDownMenuCorp>
             ) : null}
         </>
