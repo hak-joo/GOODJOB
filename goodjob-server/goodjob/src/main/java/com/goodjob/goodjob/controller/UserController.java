@@ -3,6 +3,7 @@ package com.goodjob.goodjob.controller;
 import com.goodjob.goodjob.domain.User;
 import com.goodjob.goodjob.dto.LoginDto;
 import com.goodjob.goodjob.dto.UserDto;
+import com.goodjob.goodjob.dto.UserSettingDto;
 import com.goodjob.goodjob.repository.UserRepository;
 import com.goodjob.goodjob.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -48,6 +49,12 @@ public class UserController {
         } else{
             return user;
         }
+    }
+
+    @PostMapping("/setting")
+    public String setUser(@RequestBody UserSettingDto userSettingDto){
+        String result = userService.setting(userSettingDto);
+        return result;
     }
 
 }

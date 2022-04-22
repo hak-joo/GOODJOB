@@ -4,6 +4,7 @@ import com.goodjob.goodjob.domain.Prefer;
 import com.goodjob.goodjob.domain.User;
 import com.goodjob.goodjob.dto.LoginDto;
 import com.goodjob.goodjob.dto.UserDto;
+import com.goodjob.goodjob.dto.UserSettingDto;
 import com.goodjob.goodjob.dto.naverDto;
 import com.goodjob.goodjob.repository.UserRepository;
 import com.google.gson.Gson;
@@ -92,6 +93,19 @@ public class UserService {
                 .build();
         userRepository.save(user);
         return user;
+
+    }
+
+    @Transactional
+    public String setting(UserSettingDto userSettingDto){
+        User user = userRepository.findByEmail(userSettingDto.getEmail()).orElse(null);
+        if(user == null) return "ERROR";
+        else{
+            Prefer prefer = userSettingDto.getPrefer();
+            user.setPrefer(prefer);
+            userRepository.save(user);
+            return "SUCCESS";
+        }
 
     }
 
