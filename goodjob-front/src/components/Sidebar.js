@@ -57,19 +57,21 @@ const Sidebar = ({...props}) => {
                         ]);
                     } else {
                         setPreferList([
-                            { title: '문화', id: res.data.prefer.culture, name: 'culture' },
-                            { title: '급여', id: res.data.prefer.pay, name: 'pay' },
-                            { title: '업무강도', id: res.data.prefer.task, name: 'task' },
-                            { title: '복지', id: res.data.prefer.welfare, name: 'welfare' },
-                            { title: '출퇴근', id: res.data.prefer.commute, name: 'commute' },
+                            { title: '문화', rank: res.data.prefer.culture, name: 'culture' },
+                            { title: '급여', rank: res.data.prefer.pay, name: 'pay' },
+                            { title: '업무강도', rank: res.data.prefer.task, name: 'task' },
+                            { title: '복지', rank: res.data.prefer.welfare, name: 'welfare' },
+                            { title: '출퇴근', rank: res.data.prefer.commute, name: 'commute' },
                         ]);
+                       
                         preferList.sort();
-                        console.log(preferList);
+                        
                     }
                 }
             }
         }
     };
+    
     useEffect(() => {
         fetchData();
         jobGroupList.sort();
@@ -109,6 +111,10 @@ const Sidebar = ({...props}) => {
 
     // prefer
     const [preferList, setPreferList] = useState([]);
+    console.log(preferList)
+    preferList.sort(function (a, b) {
+         return parseFloat(a.rank) - parseFloat(b.rank);
+    });
     const onClickDown = (index:number) => {
         let tempArray = preferList;
         let temp = preferList[index];
@@ -118,6 +124,39 @@ const Sidebar = ({...props}) => {
             item.rank = index;
         })
         setPreferList(Array.from(tempArray));
+    }
+    
+
+    const onClickSave = async() => {
+        let json = {};
+        for(var i=0; i<preferList.length; i++){
+            let name = preferList[i].name;
+            let rank = preferList[i].rank;
+            json[name] = rank;
+        }
+        let formData = {
+            prefer: json,
+            email: userData.email
+        };
+
+
+        let res = null;
+        try{
+            res = await userApi.setting(formData);
+        } catch(e){}
+        finally{
+            if(res){
+                if(res.data === "SUCCESS"){
+                    alert("수정이 완료되었습니다");
+                } else{
+                    alert('오류가 발생하였습니다');
+                }
+            } else {
+                alert('오류가 발생하였습니다');
+            }
+        }
+
+
     }
 
     return (
@@ -181,8 +220,8 @@ const Sidebar = ({...props}) => {
                             </s.PreferItemWrapper>
                         </s.PreferBlock>
                         <s.SaveBlock>
-                            <s.ResetButton>초기화</s.ResetButton>
-                            <s.SaveButton>저장</s.SaveButton>
+                            <s.ResetButton onClick={fetchData}>초기화</s.ResetButton>
+                            <s.SaveButton onClick={onClickSave}>저장</s.SaveButton>
                         </s.SaveBlock>
                     </s.SideBody>
                 </s.DropDownMenuCorp>

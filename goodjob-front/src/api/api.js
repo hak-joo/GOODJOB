@@ -1,8 +1,9 @@
 import { API_SERVER } from "../config/config";
-import { loginedApi, notLoginedApi } from "./api-base";
+import { baseApi} from "./api-base";
 
 export const userApi = {
-    login: (Data) => notLoginedApi.post(`/user/login`, Data),
-    getUser: (Data) => notLoginedApi.post(`/user/getuser`, Data),
+    login: (Data) => baseApi.post(`/user/login`, Data),
+    getUser: (Data) => baseApi.post(`/user/getuser`, Data),
+    setting: (Data) => baseApi.post(`/user/setting`, Data),
 };
     

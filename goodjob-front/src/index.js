@@ -26,10 +26,10 @@ const GlobalStyles = createGlobalStyle`
 export default GlobalStyles;
 
 ReactDOM.createRoot(rootNode).render(
-    <React.StrictMode>
+
         <RecoilRoot>
             <GlobalStyles/>
             <App match = {useMatch} location = {useLocation}/>
         </RecoilRoot>
-    </React.StrictMode>
+
 );
