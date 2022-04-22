@@ -1,5 +1,6 @@
 package com.goodjob.goodjob.service;
 
+import com.goodjob.goodjob.domain.Prefer;
 import com.goodjob.goodjob.domain.User;
 import com.goodjob.goodjob.dto.LoginDto;
 import com.goodjob.goodjob.dto.UserDto;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.*;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -79,12 +81,14 @@ public class UserService {
 
     @Transactional
     public User register(UserDto userDto){
+        Prefer prefer = new Prefer();
         User user = User.builder()
                 .birthyear(userDto.getBirthyear())
                 .gender(userDto.getGender())
                 .name(userDto.getName())
                 .birthday(userDto.getBirthday())
                 .email(userDto.getEmail())
+                .prefer(prefer)
                 .build();
         userRepository.save(user);
         return user;
