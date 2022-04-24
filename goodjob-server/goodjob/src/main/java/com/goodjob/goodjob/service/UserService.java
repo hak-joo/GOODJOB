@@ -103,6 +103,7 @@ public class UserService {
         else{
             Prefer prefer = userSettingDto.getPrefer();
             user.setPrefer(prefer);
+            user.setJob_group(userSettingDto.getJob_group());
             userRepository.save(user);
             return "SUCCESS";
         }

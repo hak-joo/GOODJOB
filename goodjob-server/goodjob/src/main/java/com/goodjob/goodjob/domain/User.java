@@ -28,6 +28,7 @@ public class User {
         this.birthday = birthday;
         this.birthyear = birthyear;
         this.email = email;
+        this.job_group = "";
         this.prefer = prefer;
     }
 }

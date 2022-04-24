@@ -11,5 +11,5 @@ import lombok.ToString;
 public class UserSettingDto {
     private Prefer prefer;
     private String email;
-
+    private String job_group;
 }
