@@ -55,6 +55,7 @@ const Sidebar = ({...props}) => {
                             { title: '복지', rank: 3, name: 'welfare' },
                             { title: '출퇴근', rank: 4, name: 'commute' },
                         ]);
+                        setJobGroup(res.data.job_group);
                     } else {
                         setPreferList([
                             { title: '문화', rank: res.data.prefer.culture, name: 'culture' },
@@ -63,7 +64,7 @@ const Sidebar = ({...props}) => {
                             { title: '복지', rank: res.data.prefer.welfare, name: 'welfare' },
                             { title: '출퇴근', rank: res.data.prefer.commute, name: 'commute' },
                         ]);
-                       
+                        setJobGroup(res.data.job_group);
                         preferList.sort();
                         
                     }
@@ -87,6 +88,7 @@ const Sidebar = ({...props}) => {
         setJobGroup(e.value);
     }
     const jobGroupList = [
+        { value: "", label: "미정"},
         { value: '생산관리/품질관리', label: '생산관리/품질관리' },
         { value: '경영/기획/컨설팅', label: '경영/기획/컨설팅' },
         { value: '생산/제조', label: '생산/제조' },
@@ -128,6 +130,10 @@ const Sidebar = ({...props}) => {
     
 
     const onClickSave = async() => {
+        if(jobGroup === ""){
+            alert("직군을 선택해주세요");
+            return;
+        }
         let json = {};
         for(var i=0; i<preferList.length; i++){
             let name = preferList[i].name;
@@ -136,7 +142,8 @@ const Sidebar = ({...props}) => {
         }
         let formData = {
             prefer: json,
-            email: userData.email
+            email: userData.email,
+            job_group: jobGroup
         };
 
 

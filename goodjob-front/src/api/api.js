@@ -6,4 +6,7 @@ export const userApi = {
     getUser: (Data) => baseApi.post(`/user/getuser`, Data),
     setting: (Data) => baseApi.post(`/user/setting`, Data),
 };
-    
+
+export const companyApi = {
+    list: (Data) => baseApi.post(`/company/list`, Data),
+};
