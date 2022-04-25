@@ -24,14 +24,8 @@ public class CompanyController {
     }
 
     @PostMapping("/info")
-    public List<Company> info(@RequestBody CompanyDto companyDto){
-        List<Company> company = companyService.getInfo(companyDto);
-        return company;
-    }
-
-    @PostMapping("/infoo")
-    public Company infoo(@RequestBody CompanyDto companyDto){
-        Company company = companyService.getInfoo(companyDto);
+    public Company info(@RequestBody CompanyDto companyDto){
+        Company company = companyService.getInfo(companyDto);
         System.out.println(company);
         return company;
     }

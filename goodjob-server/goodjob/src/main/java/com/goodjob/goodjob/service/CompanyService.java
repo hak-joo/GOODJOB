@@ -16,15 +16,10 @@ import java.util.List;
 public class CompanyService {
     private final CompanyRespository companyRespository;
 
-    @Transactional
-    public List<Company> getInfo(CompanyDto companyDto){
-        List<Company> company = companyRespository.findAll();
-        return company;
 
-    }
 
     @Transactional
-    public Company getInfoo(CompanyDto companyDto){
+    public Company getInfo(CompanyDto companyDto){
         Company company = companyRespository.findByCompanyNameAndWorkGroup(companyDto.getName(), companyDto.getJob_group()).orElse(null);
         return company;
 

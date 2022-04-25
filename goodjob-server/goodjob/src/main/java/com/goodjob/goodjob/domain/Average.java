@@ -1,6 +1,5 @@
 package com.goodjob.goodjob.domain;
 
-
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,52 +7,48 @@ import lombok.ToString;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import javax.persistence.Column;
-
 @Getter
 @Setter
 @Data
-@Document(collection = "counting")
+@Document(collection = "avg")
 @ToString
-public class Company {
+public class Average {
     private String id;
-
-    @Field("company_name")
-    private String companyName;
 
     @Field("work_group")
     private String workGroup;
 
-    @Field("neg_commute")
+    @Field("avg(neg_commute)")
     private double negCommute;
 
-    @Field("neg_culture")
+    @Field("avg(neg_culture)")
     private double negCulture;
 
-    @Field("neg_pay")
+    @Field("avg(neg_pay)")
     private double negPay;
 
-    @Field("neg_task")
+    @Field("avg(neg_task)")
     private double negTask;
 
-    @Field("neg_welfare")
+    @Field("avg(neg_welfare)")
     private double negWelfare;
 
-    @Field("post_commute")
+    @Field("avg(post_commute)")
     private double postComute;
 
-    @Field("post_culture")
+    @Field("avg(post_culture)")
     private double postCulture;
 
-    @Field("post_pay")
+    @Field("avg(post_pay)")
     private double postPay;
 
-    @Field("post_task")
+    @Field("avg(post_task)")
     private double postTask;
 
-    @Field("post_welfare")
+    @Field("avg(post_welfare)")
     private double postWelfare;
 
-    @Field("review_num")
+    @Field("avg(review_num)")
     private double reviewNum;
+
 }
