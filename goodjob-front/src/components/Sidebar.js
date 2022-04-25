@@ -40,7 +40,7 @@ const Sidebar = ({...props}) => {
 
             try {
                 res = await userApi.getUser(formData);
-                console.log(res);
+
             } catch (e) {
                 alert('잘못된 접근입니다.');
                 navigate('/');
@@ -113,7 +113,6 @@ const Sidebar = ({...props}) => {
 
     // prefer
     const [preferList, setPreferList] = useState([]);
-    console.log(preferList)
     preferList.sort(function (a, b) {
          return parseFloat(a.rank) - parseFloat(b.rank);
     });
@@ -216,7 +215,7 @@ const Sidebar = ({...props}) => {
                             <s.PreferTitle>우선순위 할당</s.PreferTitle>
                             <s.PreferItemWrapper>
                                 {preferList.map((item, index) => (
-                                    <s.PreferItem>
+                                    <s.PreferItem key={index}>
                                         <s.PreferIndex>{index + 1}</s.PreferIndex>
                                         <s.PreferName>{item.title}</s.PreferName>
                                         <s.PreferDownButton>

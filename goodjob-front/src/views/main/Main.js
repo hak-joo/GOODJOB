@@ -11,6 +11,7 @@ const Main = ({...props}) => {
     const token = useRecoilValue(recoilItem.access_token);
     const state = useRecoilValue(recoilItem.state_token);
     const [preferList, setPreferList] = useState([]);
+    const [companyList, setCompanyList] =useState([]);
 
     const fetchData = async () => {
         if (!token || !state) {
@@ -25,7 +26,6 @@ const Main = ({...props}) => {
 
             try {
                 res = await userApi.getUser(formData);
-                console.log(res);
             } catch (e) {
                 alert('잘못된 접근입니다.');
                 navigate('/');
@@ -62,13 +62,13 @@ const Main = ({...props}) => {
         const formData = {
             job_group: userData.job_group
         };
-        console.log(formData);
         let res = null;
         try{
             res = await companyApi.list(formData);
         } catch(e){}
         finally{
-            console.log('compnay', res);
+            setCompanyList(res.data);
+
         }
     }
 
@@ -85,12 +85,12 @@ const Main = ({...props}) => {
         companyFetchData();
     }, [userData]);
 
-    console.log(userData);
     
 
     return(
         <MainPresenter
-            userData = {props.data}
+            userData = {userData}
+            companyList = {companyList}
         ></MainPresenter>
     )
 }
