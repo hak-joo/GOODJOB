@@ -108,7 +108,7 @@ const Sidebar = ({...props}) => {
         { value: '기타', label: '기타' },
         { value: '교육', label: '교육' },
         { value: '법률/법무', label: '법률/법무' },
-        { value: '유통/무역', label: '유통/무역' }
+
     ];
 
     // prefer
