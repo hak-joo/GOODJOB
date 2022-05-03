@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -37,6 +38,8 @@ public class CompanyService {
     }
 
 
+
+
     @Transactional
     public Company getInfo(CompanyDto companyDto){
         Company company = companyRespository.findByCompanyNameAndWorkGroup(companyDto.getName(), companyDto.getJob_group()).orElse(null);
@@ -53,15 +56,20 @@ public class CompanyService {
     @Transactional
     public List<CustomCompanyDto> getCustomList(CompanyDto companyDto){
         List<Company> companyList = companyRespository.findAllByWorkGroup(companyDto.getJob_group());
-        List<CustomCompanyDto> resultList = new ArrayList<CustomCompanyDto>();
-        for(Company company: companyList){
+        List<CustomCompanyDto> calculated = new ArrayList<CustomCompanyDto>();
+        for(Company company: companyList){ //점수 측정
             double[] com = {company.getPostComute(), company.getPostCulture(), company.getPostPay(), company.getPostTask(), company.getPostWelfare()};
             double[] usr = {companyDto.getCommute(), companyDto.getCulture(), companyDto.getPay(), companyDto.getTask(), companyDto.getWelfare()};
             CustomCompanyDto c = new CustomCompanyDto();
             c.setName(company.getCompanyName());
             c.setJob_group(company.getWorkGroup());
             c.setSimillarity(getSimillarity(com, usr));
-            resultList.add(c);
+            calculated.add(c);
+        }
+        Collections.sort(calculated);
+        List<CustomCompanyDto> resultList = new ArrayList<CustomCompanyDto>();
+        for(int i=0; i<10; i++){
+            resultList.add(calculated.get(i));
         }
         return resultList;
     }
