@@ -6,7 +6,7 @@ import {FiLogOut} from 'react-icons/fi';
 
 import * as recoilItem from '../util/recoilItem';
 import * as s from './SidebarStyled';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { userApi } from '../api/api';
 import { useNavigate } from 'react-router-dom';
 
@@ -25,6 +25,7 @@ const Sidebar = ({...props}) => {
     //fetch, token
     const token = useRecoilValue(recoilItem.access_token);
     const state = useRecoilValue(recoilItem.state_token);
+    const [updated, setUpdated] = useRecoilState(recoilItem.user_update_count);
     
     const [userData, setUserData] = useState(null);
     const fetchData = async () => {
@@ -68,6 +69,7 @@ const Sidebar = ({...props}) => {
                         preferList.sort();
                         
                     }
+                    
                 }
             }
         }
@@ -154,6 +156,7 @@ const Sidebar = ({...props}) => {
             if(res){
                 if(res.data === "SUCCESS"){
                     alert("수정이 완료되었습니다");
+                    setUpdated(updated + 1);
                 } else{
                     alert('오류가 발생하였습니다');
                 }
@@ -164,6 +167,10 @@ const Sidebar = ({...props}) => {
 
 
     }
+
+    useEffect(() => {
+        fetchData();
+    }, [token, state]);
 
     return (
         <>

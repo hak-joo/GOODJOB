@@ -15,10 +15,10 @@ import Company from './views/company/Company';
 
 export default ({match, location}) => {
     const [NavVisible, setNavVisible] = useState(true);
+    const updated = useRecoilValue(recoilItem.state_token);
     const onClickMenu = () => {
         setNavVisible(!NavVisible);
     };
-
     return (
         <BrowserRouter>
             <RouterDivision>

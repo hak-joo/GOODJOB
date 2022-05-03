@@ -10,6 +10,7 @@ const Main = ({...props}) => {
     const [userData, setUserData] = useState(null);
     const token = useRecoilValue(recoilItem.access_token);
     const state = useRecoilValue(recoilItem.state_token);
+    const updated = useRecoilValue(recoilItem.user_update_count);
     const [preferList, setPreferList] = useState([]);
     const [companyList, setCompanyList] =useState([]);
 
@@ -32,7 +33,7 @@ const Main = ({...props}) => {
             } finally {
                 if (res) {
                     setUserData(res.data);
-                    if (res.data.prefer.culture + res.data.prefer.pay == 0) {
+                    if (res.data.prefer.culture + res.data.prefer.pay === 0) {
                         setPreferList([
                             { title: '문화', rank: 0, name: 'culture' },
                             { title: '급여', rank: 1, name: 'pay' },
@@ -55,25 +56,49 @@ const Main = ({...props}) => {
         }
     };
 
-    const companyFetchData = async() => {
-        if(!userData){
+    // const companyFetchData = async() => {
+    //     if(!userData){
+    //         return;
+    //     }
+    //     const formData = {
+    //         job_group: userData.job_group
+    //     };
+    //     let res = null;
+    //     try{
+    //         res = await companyApi.list(formData);
+    //     } catch(e){}
+    //     finally{
+    //         setCompanyList(res.data);
+
+    //     }
+    // }
+    const companyFetchData = async () => {
+        if (!userData) {
             return;
         }
+        console.log(userData);
         const formData = {
-            job_group: userData.job_group
+            job_group: userData.job_group,
+            commute: Math.abs(userData.prefer.commute-6),
+            pay: Math.abs(userData.prefer.pay-6),
+            welfare: Math.abs(userData.prefer.welfare-6),
+            culture: Math.abs(userData.prefer.culture-6),
+            task: Math.abs(userData.prefer.task-6),
         };
+        console.log(formData);
         let res = null;
-        try{
-            res = await companyApi.list(formData);
-        } catch(e){}
-        finally{
+        try {
+            res = await companyApi.getCustomList(formData);
+            console.log(res);
+        } catch (e) {
+        } finally {
             setCompanyList(res.data);
 
         }
-    }
+    };
 
     useEffect(() => {
-        if(token == "" || token ==null || state =="" || state == null){
+        if(token === "" || token === null || state === "" || state === null){
             navigate("/");
         }
         fetchData();
@@ -84,6 +109,10 @@ const Main = ({...props}) => {
     useEffect(() => {
         companyFetchData();
     }, [userData]);
+    useEffect(() => {
+        fetchData();
+        companyFetchData();
+    }, [updated]);
 
     
 

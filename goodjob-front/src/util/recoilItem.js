@@ -17,3 +17,9 @@ export const state_token = atom({
     default: '',
     effects_UNSTABLE: [persistAtom]
 });
+
+export const user_update_count = atom({
+    key: 'user',
+    default: 0,
+    effects_UNSTABLE: [persistAtom]
+});
