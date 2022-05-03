@@ -2,13 +2,14 @@ package com.goodjob.goodjob.service;
 
 import com.goodjob.goodjob.domain.Company;
 import com.goodjob.goodjob.dto.CompanyDto;
+import com.goodjob.goodjob.dto.CustomCompanyDto;
 import com.goodjob.goodjob.repository.CompanyRespository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import javax.naming.CompositeName;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,6 +17,24 @@ import java.util.List;
 public class CompanyService {
     private final CompanyRespository companyRespository;
 
+
+    double getSimillarity (double[] com, double[] usr){
+        double numerator = 0.0;
+        for (int i=0; i<5; i++) {
+            numerator = numerator + com[i] * usr[i];
+        }
+        double d_com = 0.0;
+        double d_usr = 0.0;
+        for(int i=0; i<5; i++){
+            d_com = d_com + Math.pow(com[i], 2);
+            d_usr = d_usr + Math.pow(usr[i], 2);
+        }
+        double denominator = Math.sqrt(d_com) * Math.sqrt(d_usr);
+        if (denominator == 0){
+            return 0.0;
+        }
+        return numerator/denominator;
+    }
 
 
     @Transactional
@@ -29,5 +48,21 @@ public class CompanyService {
     public List<Company> getList(CompanyDto companyDto){
         List<Company> companyList = companyRespository.findAllByWorkGroup(companyDto.getJob_group());
         return companyList;
+    }
+
+    @Transactional
+    public List<CustomCompanyDto> getCustomList(CompanyDto companyDto){
+        List<Company> companyList = companyRespository.findAllByWorkGroup(companyDto.getJob_group());
+        List<CustomCompanyDto> resultList = new ArrayList<CustomCompanyDto>();
+        for(Company company: companyList){
+            double[] com = {company.getPostComute(), company.getPostCulture(), company.getPostPay(), company.getPostTask(), company.getPostWelfare()};
+            double[] usr = {companyDto.getCommute(), companyDto.getCulture(), companyDto.getPay(), companyDto.getTask(), companyDto.getWelfare()};
+            CustomCompanyDto c = new CustomCompanyDto();
+            c.setName(company.getCompanyName());
+            c.setJob_group(company.getWorkGroup());
+            c.setSimillarity(getSimillarity(com, usr));
+            resultList.add(c);
+        }
+        return resultList;
     }
 }

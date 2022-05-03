@@ -3,6 +3,7 @@ package com.goodjob.goodjob.controller;
 
 import com.goodjob.goodjob.domain.Company;
 import com.goodjob.goodjob.dto.CompanyDto;
+import com.goodjob.goodjob.dto.CustomCompanyDto;
 import com.goodjob.goodjob.service.CompanyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -28,6 +29,12 @@ public class CompanyController {
         Company company = companyService.getInfo(companyDto);
         System.out.println(company);
         return company;
+    }
+
+    @PostMapping("/customlist")
+    public List<CustomCompanyDto> customList(@RequestBody CompanyDto companyDto){
+        List<CustomCompanyDto> companyList = companyService.getCustomList(companyDto);
+        return companyList;
     }
 
 }
