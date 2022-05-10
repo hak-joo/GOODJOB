@@ -1,18 +1,18 @@
-import React,{useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import MainPresenter from './MainPresenter';
 import { userApi, companyApi } from '../../api/api';
 import * as recoilItem from '../../util/recoilItem';
 import { useRecoilValue } from 'recoil';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-const Main = ({...props}) => {
+const Main = ({ ...props }) => {
     const navigate = useNavigate();
     const [userData, setUserData] = useState(null);
     const token = useRecoilValue(recoilItem.access_token);
     const state = useRecoilValue(recoilItem.state_token);
     const updated = useRecoilValue(recoilItem.user_update_count);
     const [preferList, setPreferList] = useState([]);
-    const [companyList, setCompanyList] =useState([]);
+    const [companyList, setCompanyList] = useState([]);
 
     const fetchData = async () => {
         if (!token || !state) {
@@ -56,22 +56,6 @@ const Main = ({...props}) => {
         }
     };
 
-    // const companyFetchData = async() => {
-    //     if(!userData){
-    //         return;
-    //     }
-    //     const formData = {
-    //         job_group: userData.job_group
-    //     };
-    //     let res = null;
-    //     try{
-    //         res = await companyApi.list(formData);
-    //     } catch(e){}
-    //     finally{
-    //         setCompanyList(res.data);
-
-    //     }
-    // }
     const companyFetchData = async () => {
         if (!userData) {
             return;
@@ -79,11 +63,11 @@ const Main = ({...props}) => {
         console.log(userData);
         const formData = {
             job_group: userData.job_group,
-            commute: Math.abs(userData.prefer.commute-6),
-            pay: Math.abs(userData.prefer.pay-6),
-            welfare: Math.abs(userData.prefer.welfare-6),
-            culture: Math.abs(userData.prefer.culture-6),
-            task: Math.abs(userData.prefer.task-6),
+            commute: Math.abs(userData.prefer.commute - 6),
+            pay: Math.abs(userData.prefer.pay - 6),
+            welfare: Math.abs(userData.prefer.welfare - 6),
+            culture: Math.abs(userData.prefer.culture - 6),
+            task: Math.abs(userData.prefer.task - 6),
         };
         console.log(formData);
         let res = null;
@@ -93,17 +77,14 @@ const Main = ({...props}) => {
         } catch (e) {
         } finally {
             setCompanyList(res.data);
-
         }
     };
 
     useEffect(() => {
-        if(token === "" || token === null || state === "" || state === null){
-            navigate("/");
+        if (token === '' || token === null || state === '' || state === null) {
+            navigate('/');
         }
         fetchData();
-        
-
     }, []);
 
     useEffect(() => {
@@ -114,14 +95,7 @@ const Main = ({...props}) => {
         companyFetchData();
     }, [updated]);
 
-    
-
-    return(
-        <MainPresenter
-            userData = {userData}
-            companyList = {companyList}
-        ></MainPresenter>
-    )
-}
+    return <MainPresenter userData={userData} companyList={companyList}></MainPresenter>;
+};
 
 export default Main;

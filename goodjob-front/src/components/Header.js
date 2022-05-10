@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as s from './HeaderStyled';
 import { AiOutlineMenu } from 'react-icons/ai';
 import { Link } from 'react-router-dom';

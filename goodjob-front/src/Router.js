@@ -12,17 +12,19 @@ import Main from './views/main/Main';
 import * as recoilItem from './util/recoilItem';
 import Footer from './footer/Footer';
 import Company from './views/company/Company';
+import CompanyList from './views/companylist/CompanyList';
 
-export default ({match, location}) => {
+export default ({ match, location }) => {
     const [NavVisible, setNavVisible] = useState(true);
     const updated = useRecoilValue(recoilItem.state_token);
     const onClickMenu = () => {
         setNavVisible(!NavVisible);
     };
+
     return (
         <BrowserRouter>
             <RouterDivision>
-                <Sidebar NavVisible={NavVisible} onClickMenu={onClickMenu} />
+                <Sidebar NavVisible={NavVisible} setNavVisible={setNavVisible} onClickMenu={onClickMenu} />
                 <WidthDiv>
                     <Header NavVisible={NavVisible} onClickMenu={onClickMenu} />
 
@@ -30,7 +32,8 @@ export default ({match, location}) => {
                         <Route path="/main" element={<Main />}></Route>
                         <Route path="/" element={<Login />}></Route>
                         <Route path="/callback" element={<Login />}></Route>
-                        <Route path = "/company" element= {<Company/>}></Route>
+                        <Route path="/company" element={<Company />}></Route>
+                        <Route path="/list" element={<CompanyList />}></Route>
                     </Routes>
                 </WidthDiv>
             </RouterDivision>

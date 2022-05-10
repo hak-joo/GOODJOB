@@ -1,32 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
-import {HiUserCircle} from 'react-icons/hi';
+import { HiUserCircle } from 'react-icons/hi';
 import { AiOutlineArrowLeft, AiFillCaretDown } from 'react-icons/ai';
-import {FiLogOut} from 'react-icons/fi';
+import { FiLogOut } from 'react-icons/fi';
 
 import * as recoilItem from '../util/recoilItem';
 import * as s from './SidebarStyled';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { userApi } from '../api/api';
 import { useNavigate } from 'react-router-dom';
+import history from '../util/history';
 
-
-const Sidebar = ({...props}) => {
+const Sidebar = ({ ...props }) => {
     //Navigation Management
     const [navColor, setNavColor] = useState('#ffffff');
-     const onMouseOverNav = () => {
-         setNavColor('#d5d3d3');
-     };
-     const onMouseOutNav = () => {
-         setNavColor('#ffffff');
-     };
+    const onMouseOverNav = () => {
+        setNavColor('#d5d3d3');
+    };
+    const onMouseOutNav = () => {
+        setNavColor('#ffffff');
+    };
     const navigate = useNavigate();
 
     //fetch, token
-    const token = useRecoilValue(recoilItem.access_token);
-    const state = useRecoilValue(recoilItem.state_token);
+    const [token, setToken] = useRecoilState(recoilItem.access_token);
+    const [state, setState] = useRecoilState(recoilItem.state_token);
     const [updated, setUpdated] = useRecoilState(recoilItem.user_update_count);
-    
+
     const [userData, setUserData] = useState(null);
     const fetchData = async () => {
         if (!token || !state) {
@@ -41,7 +41,6 @@ const Sidebar = ({...props}) => {
 
             try {
                 res = await userApi.getUser(formData);
-
             } catch (e) {
                 alert('잘못된 접근입니다.');
                 navigate('/');
@@ -67,30 +66,35 @@ const Sidebar = ({...props}) => {
                         ]);
                         setJobGroup(res.data.job_group);
                         preferList.sort();
-                        
                     }
-                    
                 }
             }
         }
     };
-    
+
     useEffect(() => {
         fetchData();
         jobGroupList.sort();
     }, []);
+
     const onClickLogout = () => {
         localStorage.clear();
-        navigate("/");
-    }
-    
+        setToken(null);
+        setState(null);
+        setUpdated(null);
+        setUserData(null);
+        navigate('/');
+        alert('로그아웃 되었습니다');
+        props.setNavVisible(false);
+    };
+
     // job
     const [jobGroup, setJobGroup] = useState('금융/재무');
-    const onChangeJobGroup = (e) =>{
+    const onChangeJobGroup = (e) => {
         setJobGroup(e.value);
-    }
+    };
     const jobGroupList = [
-        { value: "", label: "미정"},
+        { value: '', label: '미정' },
         { value: '생산관리/품질관리', label: '생산관리/품질관리' },
         { value: '경영/기획/컨설팅', label: '경영/기획/컨설팅' },
         { value: '생산/제조', label: '생산/제조' },
@@ -110,33 +114,31 @@ const Sidebar = ({...props}) => {
         { value: '기타', label: '기타' },
         { value: '교육', label: '교육' },
         { value: '법률/법무', label: '법률/법무' },
-
     ];
 
     // prefer
     const [preferList, setPreferList] = useState([]);
     preferList.sort(function (a, b) {
-         return parseFloat(a.rank) - parseFloat(b.rank);
+        return parseFloat(a.rank) - parseFloat(b.rank);
     });
-    const onClickDown = (index:number) => {
+    const onClickDown = (index: number) => {
         let tempArray = preferList;
         let temp = preferList[index];
-        tempArray.splice(index,1);
-        tempArray.splice(index+1,0,temp);
+        tempArray.splice(index, 1);
+        tempArray.splice(index + 1, 0, temp);
         tempArray.map((item, index) => {
             item.rank = index;
-        })
+        });
         setPreferList(Array.from(tempArray));
-    }
-    
+    };
 
-    const onClickSave = async() => {
-        if(jobGroup === ""){
-            alert("직군을 선택해주세요");
+    const onClickSave = async () => {
+        if (jobGroup === '') {
+            alert('직군을 선택해주세요');
             return;
         }
         let json = {};
-        for(var i=0; i<preferList.length; i++){
+        for (var i = 0; i < preferList.length; i++) {
             let name = preferList[i].name;
             let rank = preferList[i].rank;
             json[name] = rank;
@@ -144,29 +146,26 @@ const Sidebar = ({...props}) => {
         let formData = {
             prefer: json,
             email: userData.email,
-            job_group: jobGroup
+            job_group: jobGroup,
         };
 
-
         let res = null;
-        try{
+        try {
             res = await userApi.setting(formData);
-        } catch(e){}
-        finally{
-            if(res){
-                if(res.data === "SUCCESS"){
-                    alert("수정이 완료되었습니다");
+        } catch (e) {
+        } finally {
+            if (res) {
+                if (res.data === 'SUCCESS') {
+                    alert('수정이 완료되었습니다');
                     setUpdated(updated + 1);
-                } else{
+                } else {
                     alert('오류가 발생하였습니다');
                 }
             } else {
                 alert('오류가 발생하였습니다');
             }
         }
-
-
-    }
+    };
 
     useEffect(() => {
         fetchData();
@@ -241,6 +240,6 @@ const Sidebar = ({...props}) => {
             ) : null}
         </>
     );
-}
+};
 
 export default Sidebar;

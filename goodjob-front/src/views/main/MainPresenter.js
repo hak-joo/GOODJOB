@@ -5,11 +5,16 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-const MainPresenter = ({...props}) => {
-
+const MainPresenter = ({ ...props }) => {
     function Arrow(props) {
         const { className, style, onClick } = props;
-        return <div className={className} style={{ ...style, display: 'block', background: 'gray', outline: 'none', borderRadius: '10px'}} onClick={onClick} />;
+        return (
+            <div
+                className={className}
+                style={{ ...style, display: 'block', background: 'gray', outline: 'none', borderRadius: '10px' }}
+                onClick={onClick}
+            />
+        );
     }
 
     const settings = {
@@ -20,14 +25,29 @@ const MainPresenter = ({...props}) => {
         slidesToScroll: 1,
         arrows: true,
         centerMode: true,
-        nextArrow: <Arrow/>,
-        prevArrow: <Arrow/>,
+        nextArrow: <Arrow />,
+        prevArrow: <Arrow />,
     };
-    const {userData, companyList} = props;
+    const { userData, companyList } = props;
     return (
         <s.Container>
             <s.MainBlock>
-                <s.MainHeader>적합기업 추천 결과</s.MainHeader>
+                <s.MainHeader>
+                    <s.MainItem to={`/`}>기업별 통계조회</s.MainItem>
+                    <s.MainItem
+                        to={`/list`}
+                        state={{
+                            workGroup: userData ? userData.job_group : null,
+                        }}
+                    >
+                        {userData ? <div>{userData.job_group} </div> : null}
+                        <div>회사 리스트</div>
+                    </s.MainItem>
+                    <s.MainItem to={`/`} isLast={true}>
+                        검색
+                    </s.MainItem>
+                </s.MainHeader>
+                <s.MainTitle>적합기업 추천 결과</s.MainTitle>
 
                 <s.MainCarousel>
                     <Slider {...settings}>
@@ -54,10 +74,9 @@ const MainPresenter = ({...props}) => {
                             : null}
                     </Slider>
                 </s.MainCarousel>
-                <s.MainOther></s.MainOther>
             </s.MainBlock>
         </s.Container>
     );
-}
+};
 
 export default MainPresenter;
