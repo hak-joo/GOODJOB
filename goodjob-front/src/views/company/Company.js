@@ -6,6 +6,7 @@ import { companyApi } from '../../api/api';
 const Company = ({...props}) => {
     const location = useLocation();
     const { workGroup, company} = location.state;
+
     const [companyData, setCompanyData] = useState(null);
     const [avgData, setAvgData] = useState(null);
     const fetchData = async() => {

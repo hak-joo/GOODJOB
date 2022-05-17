@@ -61,6 +61,7 @@ const MainPresenter = ({ ...props }) => {
                                               state={{
                                                   workGroup: userData.job_group,
                                                   company: company.name,
+                                                  
                                               }}
                                               style={{ textDecoration: 'none', textDecorationLine: 'none' }}
                                           >
