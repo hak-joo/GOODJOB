@@ -2,9 +2,11 @@ package com.goodjob.goodjob.service;
 
 import com.goodjob.goodjob.domain.Company;
 import com.goodjob.goodjob.dto.CompanyDto;
+import com.goodjob.goodjob.dto.CompanyWithPage;
 import com.goodjob.goodjob.dto.CustomCompanyDto;
 import com.goodjob.goodjob.repository.CompanyRespository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +21,7 @@ public class CompanyService {
     private final CompanyRespository companyRespository;
 
 
-    double getSimillarity (double[] com, double[] usr){
+    double getSimilarity (double[] com, double[] usr){
         double numerator = 0.0;
         for (int i=0; i<5; i++) {
             numerator = numerator + com[i] * usr[i];
@@ -48,9 +50,26 @@ public class CompanyService {
     }
 
     @Transactional
-    public List<Company> getList(CompanyDto companyDto){
-        List<Company> companyList = companyRespository.findAllByWorkGroup(companyDto.getJob_group());
-        return companyList;
+    public CompanyWithPage getList(CompanyDto companyDto){
+        System.out.println(companyDto);
+        Pageable pageable = PageRequest.of(companyDto.getPage(), 8);
+        List<Company> companyList = companyRespository.findAllByWorkGroup(companyDto.getJob_group(), pageable);
+        int totalNum = companyRespository.findAllByWorkGroup(companyDto.getJob_group()).size()/8 + 1;
+        List<CustomCompanyDto> calculated = new ArrayList<CustomCompanyDto>();
+        for(Company company: companyList){ //점수 측정
+            double[] com = {company.getPostComute(), company.getPostCulture(), company.getPostPay(), company.getPostTask(), company.getPostWelfare()};
+            double[] usr = {companyDto.getCommute(), companyDto.getCulture(), companyDto.getPay(), companyDto.getTask(), companyDto.getWelfare()};
+            CustomCompanyDto c = new CustomCompanyDto();
+            c.setName(company.getCompanyName());
+            c.setJob_group(company.getWorkGroup());
+            c.setSimillarity(getSimilarity(com, usr));
+            calculated.add(c);
+        }
+        Collections.sort(calculated);
+        CompanyWithPage companyWithPage = new CompanyWithPage();
+        companyWithPage.setCompanyDtoList(calculated);
+        companyWithPage.setTotalPage(totalNum);
+        return companyWithPage;
     }
 
     @Transactional
@@ -63,7 +82,7 @@ public class CompanyService {
             CustomCompanyDto c = new CustomCompanyDto();
             c.setName(company.getCompanyName());
             c.setJob_group(company.getWorkGroup());
-            c.setSimillarity(getSimillarity(com, usr));
+            c.setSimillarity(getSimilarity(com, usr));
             calculated.add(c);
         }
         Collections.sort(calculated);

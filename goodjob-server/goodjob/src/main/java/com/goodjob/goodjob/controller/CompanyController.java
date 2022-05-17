@@ -3,6 +3,7 @@ package com.goodjob.goodjob.controller;
 
 import com.goodjob.goodjob.domain.Company;
 import com.goodjob.goodjob.dto.CompanyDto;
+import com.goodjob.goodjob.dto.CompanyWithPage;
 import com.goodjob.goodjob.dto.CustomCompanyDto;
 import com.goodjob.goodjob.service.CompanyService;
 import lombok.RequiredArgsConstructor;
@@ -19,8 +20,8 @@ public class CompanyController {
     private final CompanyService companyService;
 
     @PostMapping("/list")
-    public List<Company> list(@RequestBody CompanyDto companyDto){
-        List<Company> companyList = companyService.getList(companyDto);
+    public CompanyWithPage list(@RequestBody CompanyDto companyDto){
+        CompanyWithPage companyList = companyService.getList(companyDto);
         return companyList;
     }
 

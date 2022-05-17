@@ -1,6 +1,7 @@
 package com.goodjob.goodjob.domain;
 
 
+import com.goodjob.goodjob.dto.CustomCompanyDto;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +16,7 @@ import javax.persistence.Column;
 @Data
 @Document(collection = "counting")
 @ToString
-public class Company {
+public class Company{
     private String id;
 
     @Field("company_name")

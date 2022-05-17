@@ -10,6 +10,7 @@ public class CustomCompanyDto implements Comparable<CustomCompanyDto>{
     private String job_group;
 
     private double simillarity;
+    private Integer total;
 
     @Override
     public int compareTo(CustomCompanyDto c){

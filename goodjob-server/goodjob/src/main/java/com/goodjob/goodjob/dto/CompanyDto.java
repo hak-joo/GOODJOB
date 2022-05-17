@@ -13,6 +13,7 @@ public class CompanyDto {
     private String job_group;
     private String id;
 
+    private int page;
     private Integer welfare;
     private Integer pay;
     private Integer task;
