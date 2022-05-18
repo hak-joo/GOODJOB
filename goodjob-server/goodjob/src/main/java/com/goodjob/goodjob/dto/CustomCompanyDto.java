@@ -16,7 +16,7 @@ public class CustomCompanyDto implements Comparable<CustomCompanyDto>{
     public int compareTo(CustomCompanyDto c){
         if(c.simillarity < simillarity){
             return -1;
-        } else if (c.simillarity < simillarity){
+        } else if (c.simillarity > simillarity){
             return 1;
         } else{
             return 0;

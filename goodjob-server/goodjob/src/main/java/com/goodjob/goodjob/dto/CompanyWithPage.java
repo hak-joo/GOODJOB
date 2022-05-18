@@ -10,6 +10,7 @@ import java.util.List;
 public class CompanyWithPage {
     private List<CustomCompanyDto> companyDtoList;
     private int page;
+    private int lastPage;
     private int totalPage;
 
 }
