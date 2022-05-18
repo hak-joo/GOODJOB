@@ -105,9 +105,14 @@ export const Card = styled.div`
 `;
 
 export const CardContent = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     padding: 1rem;
     background-color: #3cb371;
     border-radius: 20px;
+    width: 100%;
     height: 100%;
     color: white;
     &:hover {
@@ -117,10 +122,28 @@ export const CardContent = styled.div`
 `;
 
 export const CompanyName = styled.div`
+    flex: 2;
     text-align: center;
-    font-size: 20px;
+    font-size: 25px;
     font-weight: bold;
-    @media screen and (min-width: 767px) {
-        font-size: 15px;
-    }
+    
+`;
+
+export const Similarity = styled.div`
+    flex: 4;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+`;
+
+export const SimilarityDes = styled.div`
+    font-size: 28px;
+`;
+
+export const SimilarityNum = styled.div`
+    font-size: 20px;
 `;

@@ -38,8 +38,31 @@ const CompanyListPresenter = ({...props}) => {
                     </s.ListItemArea>
                 </s.ListArea>
                 <s.Pagenation>
-                    {page === 1 ? null : <BsArrowLeftCircle color={'#16a085'} size={30} onClick={() => props.setPage(page - 1)} />}
-                    {totalPage === page ? null : <BsArrowRightCircle color={'#16a085'} size={30} onClick={() => props.setPage(page + 1)} />}
+                    {page === 1 ? null : (
+                        <BsArrowLeftCircle
+                            color={'#16a085'}
+                            size={30}
+                            // onClick={() => props.setPage(page - 1)}
+                            onClick={() => {
+                                props.setPage(props.page - 1);
+                                navigate(`/list/${props.page - 1}`, { state: { workGroup: props.workGroup } });
+                            }}
+                            style={{ cursor: 'pointer', marginLeft: 20, marginRight: 20, marginBottom: 20 }}
+                        />
+                    )}
+                    
+                    {totalPage === page ? null : (
+                        <BsArrowRightCircle
+                            color={'#16a085'}
+                            size={30}
+                            // onClick={() => props.setPage(page + 1)}
+                            onClick={() => {
+                                props.setPage(props.page+1);
+                                navigate(`/list/${props.page + 1}`, { state: { workGroup: props.workGroup } });
+                            }}
+                            style={{ cursor: 'pointer', marginLeft: 20, marginRight: 20, marginBottom: 20 }}
+                        />
+                    )}
                 </s.Pagenation>
             </s.MainBlock>
         </s.Container>

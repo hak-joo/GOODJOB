@@ -33,7 +33,7 @@ export default ({ match, location }) => {
                         <Route path="/" element={<Login />}></Route>
                         <Route path="/callback" element={<Login />}></Route>
                         <Route path="/company" element={<Company />}></Route>
-                        <Route path="/list" element={<CompanyList />}></Route>
+                        <Route path="/list/:page" element={<CompanyList />}></Route>
                     </Routes>
                 </WidthDiv>
             </RouterDivision>

@@ -35,7 +35,7 @@ const MainPresenter = ({ ...props }) => {
                 <s.MainHeader>
                     <s.MainItem to={`/`}>기업별 통계조회</s.MainItem>
                     <s.MainItem
-                        to={`/list`}
+                        to={`/list/1`}
                         state={{
                             workGroup: userData ? userData.job_group : null,
                         }}
@@ -61,12 +61,15 @@ const MainPresenter = ({ ...props }) => {
                                               state={{
                                                   workGroup: userData.job_group,
                                                   company: company.name,
-                                                  
                                               }}
                                               style={{ textDecoration: 'none', textDecorationLine: 'none' }}
                                           >
                                               <s.CardContent>
                                                   <s.CompanyName>{company.name}</s.CompanyName>
+                                                  <s.Similarity>
+                                                      <s.SimilarityDes>적합도</s.SimilarityDes>
+                                                      <s.SimilarityNum>{Math.floor(company.simillarity * 100)}%</s.SimilarityNum>
+                                                  </s.Similarity>
                                               </s.CardContent>
                                           </Link>
                                       </s.Card>

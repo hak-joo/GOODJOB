@@ -46,7 +46,7 @@ export const ListHeader = styled.div`
     width: 100%;
     display: flex;
     text-align: center;
-
+    font-weight: bolder;
     align-items: center;
     background-color: #3cb371;
     color: white;
@@ -83,14 +83,20 @@ export const ListItem = styled(Link)`
     width: 100%;
     display: flex;
     flex-direction: row;
-    background-color: #e2e2e2;
+    background-color: #f6f6f6;
     color: black;
     height: 40px;
-
+    &:hover {
+        background-color: #e2e2e2;
+    }
     align-items: center;
     border-bottom: 1px solid white;
     text-decoration: none;
-    
+    -webkit-transition: all 0.6s ease-out 0s;
+    -moz-transition: all 0.6s ease-out 0s;
+    -ms-transition: all 0.6s ease-out 0s;
+    -o-transition: all 0.6s ease-out 0s;
+    transition: all 0.6s ease-out 0s;
 `;
 
 export const Pagenation = styled.div`

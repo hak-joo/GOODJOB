@@ -1,23 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import CompanyListPresenter from './CompanyListPresenter';
 import { companyApi, userApi } from '../../api/api';
 import { useRecoilValue } from 'recoil';
 import * as recoilItem from '../../util/recoilItem';
+
 const CompanyListContainer = ({ ...props }) => {
     const location = useLocation();
     const navigate = useNavigate();
-    const { workGroup, company } = location.state;
+
     
     const [userData, setUserData] = useState(null);
     const token = useRecoilValue(recoilItem.access_token);
     const state = useRecoilValue(recoilItem.state_token);
     const [companyList, setCompanyList] = useState([]);
-    
-    const [page, setPage] = useState(1);
+    const [workGroup, setWorkGroup] = useState('');
+
+    // const [page, setPage] = useState(1);
     const [totalPage, setTotalPage] = useState(1);
-    
-    
+    const param = useParams();
+    const [page, setPage] = useState(param.page? parseInt(param.page) : 1);
     const fetchData = async () => {
         if (!token || !state) {
             localStorage.clear();
@@ -37,6 +39,7 @@ const CompanyListContainer = ({ ...props }) => {
             } finally {
                 if (res) {
                     setUserData(res.data);
+                    setWorkGroup(res.data.job_group);
                 } else{
                     navigate('/');
                 }
@@ -47,31 +50,38 @@ const CompanyListContainer = ({ ...props }) => {
     const companyFetchData = async () => {
         if(userData == null) return;
         const formData = {
-            job_group: workGroup,
+            job_group: userData.job_group,
             page: page,
-            welfare: userData.prefer.welfare,
-            pay: userData.prefer.pay,
-            task: userData.prefer.commute,
-            culture: userData.prefer.culture,
-            commute: userData.prefer.commute,
+
+            commute: Math.abs(userData.prefer.commute - 5) * 20,
+            pay: Math.abs(userData.prefer.pay - 5) * 20,
+            welfare: Math.abs(userData.prefer.welfare - 5) * 20,
+            culture: Math.abs(userData.prefer.culture - 5) * 20,
+            task: Math.abs(userData.prefer.task - 5) * 20,
+
+            ncommute: Math.abs(userData.prefer.commute + 1) * -20,
+            npay: Math.abs(userData.prefer.pay + 1) * 20,
+            nwelfare: Math.abs(userData.prefer.welfare + 1) * -20,
+            nculture: Math.abs(userData.prefer.culture + 1) * -20,
+            ntask: Math.abs(userData.prefer.task + 1) * -20,
         };
-        console.log(formData);
+
         let res = null;
 
         try {
             res = await companyApi.list(formData);
         } catch (e) {
         } finally {
-            console.log(res);
+
             setCompanyList(res.data.companyDtoList);
-            setTotalPage(res.data.totalPage);
+            setTotalPage(res.data.lastPage);
         }
     };
 
     useEffect(() => {
         fetchData();
         
-    }, []);
+    }, [page]);
     useEffect(() => {
         companyFetchData();
 

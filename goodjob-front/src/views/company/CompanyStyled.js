@@ -33,9 +33,18 @@ export const MainBlock = styled.div`
 `;
 
 export const CompanyInfoArea = styled.div`
+    margin-top: 30px;
     flex: 1;
-`;
+    font-size: 32px;
+    font-weight: bold;
+    color: #3cb371;
 
+`;
+export const DescriptionText = styled.div`
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+`;
 export const CompanyGraphArea = styled.div`
     flex: 8;
     width: 70%;

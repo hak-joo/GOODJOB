@@ -60,20 +60,26 @@ const Main = ({ ...props }) => {
         if (!userData) {
             return;
         }
-        console.log(userData);
+
         const formData = {
             job_group: userData.job_group,
-            commute: Math.abs(userData.prefer.commute - 6),
-            pay: Math.abs(userData.prefer.pay - 6),
-            welfare: Math.abs(userData.prefer.welfare - 6),
-            culture: Math.abs(userData.prefer.culture - 6),
-            task: Math.abs(userData.prefer.task - 6),
+            commute: Math.abs(userData.prefer.commute - 5) * 20,
+            pay: Math.abs(userData.prefer.pay - 5) * 20,
+            welfare: Math.abs(userData.prefer.welfare - 5) * 20,
+            culture: Math.abs(userData.prefer.culture - 5) * 20,
+            task: Math.abs(userData.prefer.task - 5) * 20,
+
+            ncommute: Math.abs(userData.prefer.commute+1) * -20,
+            npay: Math.abs(userData.prefer.pay+1) * 20,
+            nwelfare: Math.abs(userData.prefer.welfare+1) * -20,
+            nculture: Math.abs(userData.prefer.culture+1) * -20,
+            ntask: Math.abs(userData.prefer.task+1) * -20,
         };
-        console.log(formData);
+
         let res = null;
         try {
             res = await companyApi.getCustomList(formData);
-            console.log(res);
+
         } catch (e) {
         } finally {
             setCompanyList(res.data);

@@ -85,7 +85,7 @@ const CompanyPresenter = ({...props}) => {
                         </s.CompanyInfoArea>
                         <s.CompanyGraphArea>
                             <s.GraphArea>
-                                장점
+                                <s.DescriptionText>장점</s.DescriptionText>
                                 <RadarChart outerRadius={120} width={350} height={300} data={postList}>
                                     <PolarGrid />
                                     <PolarAngleAxis dataKey="title" />
@@ -102,7 +102,7 @@ const CompanyPresenter = ({...props}) => {
                                 </RadarChart>
                             </s.GraphArea>
                             <s.GraphArea>
-                                단점
+                                <s.DescriptionText>단점</s.DescriptionText>
                                 <RadarChart outerRadius={120} width={350} height={300} data={negList}>
                                     <PolarGrid />
                                     <PolarAngleAxis dataKey="title" />
