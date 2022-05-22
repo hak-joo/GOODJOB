@@ -33,7 +33,7 @@ const MainPresenter = ({ ...props }) => {
         <s.Container>
             <s.MainBlock>
                 <s.MainHeader>
-                    <s.MainItem to={`/`}>기업별 통계조회</s.MainItem>
+                    <s.MainItem to={`/main`}>기업별 통계조회</s.MainItem>
                     <s.MainItem
                         to={`/list/1`}
                         state={{
@@ -43,7 +43,11 @@ const MainPresenter = ({ ...props }) => {
                         {userData ? <div>{userData.job_group} </div> : null}
                         <div>회사 리스트</div>
                     </s.MainItem>
-                    <s.MainItem to={`/`} isLast={true}>
+                    <s.MainItem to={`/search`} state = {{
+                        searchPage: 1,
+                        searchGroup: "",
+                        searchKeyword: ""
+                    }} isLast={true}>
                         검색
                     </s.MainItem>
                 </s.MainHeader>

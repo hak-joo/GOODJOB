@@ -8,7 +8,7 @@ import * as recoilItem from '../../util/recoilItem';
 const CompanyListContainer = ({ ...props }) => {
     const location = useLocation();
     const navigate = useNavigate();
-
+    const keyword = useState('');
     
     const [userData, setUserData] = useState(null);
     const token = useRecoilValue(recoilItem.access_token);
@@ -77,6 +77,8 @@ const CompanyListContainer = ({ ...props }) => {
             setTotalPage(res.data.lastPage);
         }
     };
+
+
 
     useEffect(() => {
         fetchData();

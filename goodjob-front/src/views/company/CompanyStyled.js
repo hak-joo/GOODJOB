@@ -31,9 +31,17 @@ export const MainBlock = styled.div`
         min-height: 650px;
     } */
 `;
+export const BackButtonArea = styled.div`
+    flex: 0.3;
+    width: 95%;
+    display: flex;
+    margin: 10px 10px;
+    justify-self: left;
 
+
+`;
 export const CompanyInfoArea = styled.div`
-    margin-top: 30px;
+
     flex: 1;
     font-size: 32px;
     font-weight: bold;

@@ -59,7 +59,8 @@ export const MainHeader = styled.div`
 export const MainItem = styled(Link)`
     text-decoration: none;
     font-weight: normal;
-    color: black;
+    color: green;
+    font-weight: bold;
     flex: 1;
     display: flex;
     align-items: center;

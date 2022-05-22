@@ -12,4 +12,5 @@ export const companyApi = {
     getInfo: (Data) => baseApi.post(`/company/info`, Data),
     getAvg: (Data) => baseApi.post(`/average/info`, Data),
     getCustomList : (Data) => baseApi.post(`/company/customlist`, Data),
+    getSearchList: (Data) => baseApi.post(`/company/searchList`, Data),
 };

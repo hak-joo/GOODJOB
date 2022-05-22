@@ -8,11 +8,14 @@ import {
     PolarRadiusAxis,
     Legend,
 } from 'recharts';
+import { useNavigate } from 'react-router-dom';
+import { MdArrowBackIos } from 'react-icons/md';
 
 const CompanyPresenter = ({...props}) => {
-    const {companyData, avgData} = props;
+    const {companyData, avgData, onClickBackButton} = props;
     const [postList, setPostList] = useState(null);
     const [negList, setNegList] = useState(null);
+
     useEffect(() => {
         if(!companyData || !avgData) return;
         let positive = [
@@ -75,11 +78,17 @@ const CompanyPresenter = ({...props}) => {
         setNegList(negative);
     }, [companyData, avgData]);
 
+    
     return (
         <s.Container>
             <s.MainBlock>
                 {postList && companyData ? (
                     <>
+                      
+                        <s.BackButtonArea>
+                            <MdArrowBackIos size={30} color={'#3cb371'} cursor="pointer" onClick={onClickBackButton} />
+                        </s.BackButtonArea>
+                       
                         <s.CompanyInfoArea>
                             {companyData.companyName} - {companyData.workGroup}
                         </s.CompanyInfoArea>

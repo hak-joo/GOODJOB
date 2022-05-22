@@ -23,6 +23,41 @@ export const MainBlock = styled.div`
     flex-direction: column;
 `;
 
+export const MainHeader = styled.div`
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+`;
+
+
+export const MainItem = styled(Link)`
+    text-decoration: none;
+    font-weight: normal;
+    color: green;
+    font-weight: bold;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #c8ead1;
+    border-right: ${(props) => (props.isLast ? 'none' : '1px solid white')};
+    flex-direction: column;
+    cursor: pointer;
+    &:hover {
+        font-size: 18px;
+        background-color: #3cb371;
+        opacity: 0.7;
+        font-weight: bolder;
+        color: white;
+    }
+    -webkit-transition: all 0.2s ease-out 0s;
+    -moz-transition: all 0.2s ease-out 0s;
+    -ms-transition: all 0.2s ease-out 0s;
+    -o-transition: all 0.2s ease-out 0s;
+    transition: all 0.2s ease-out 0s;
+`;
+
+
 export const MainTitle = styled.div`
     padding: 30px;
     font-size: 35px;
@@ -31,13 +66,34 @@ export const MainTitle = styled.div`
     flex: 1;
 `;
 
+export const CompanyListHeader = styled.div`
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+`;
+
+export const CompanyListSearchArea = styled.div`
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
+export const CompanySearch = styled.input`
+    width: 70%;
+    height: 25px;
+    border-radius: 5px;
+    border: 1px solid #3cb371;
+    outline: none;
+    color: #3cb371;
+    font-weight: bold;
+`;
+
 export const ListArea = styled.div`
     width: 100%;
     flex: 5;
     display: flex;
     flex-direction: column;
-
-    
 
 `;
 

@@ -7,11 +7,31 @@ import { Link, useNavigate } from 'react-router-dom';
 const CompanyListPresenter = ({...props}) => {
     const {companyList,page, totalPage, workGroup} = props;
     const navigate = useNavigate();
-
     return (
         <s.Container>
             <s.MainBlock>
-                <s.MainTitle>회사리스트</s.MainTitle>
+                <s.MainHeader>
+                    <s.MainItem to={`/main`}>
+                        <div>사용자 추천</div>
+                    </s.MainItem>
+                    <s.MainItem to={`/main`}>
+                        <div>직군 비교</div>
+                    </s.MainItem>
+                    <s.MainItem
+                        to={`/search`}
+                        state={{
+                            searchPage: 1,
+                            searchGroup: '',
+                            searchKeyword: '',
+                        }}
+                    >
+                        <div>검색</div>
+                    </s.MainItem>
+                </s.MainHeader>
+                <s.CompanyListHeader>
+                    <s.MainTitle>회사리스트</s.MainTitle>
+                </s.CompanyListHeader>
+
                 <s.ListArea>
                     <s.ListHeader>
                         <s.CompanyTitle>회사</s.CompanyTitle>
@@ -50,14 +70,14 @@ const CompanyListPresenter = ({...props}) => {
                             style={{ cursor: 'pointer', marginLeft: 20, marginRight: 20, marginBottom: 20 }}
                         />
                     )}
-                    
+
                     {totalPage === page ? null : (
                         <BsArrowRightCircle
                             color={'#16a085'}
                             size={30}
                             // onClick={() => props.setPage(page + 1)}
                             onClick={() => {
-                                props.setPage(props.page+1);
+                                props.setPage(props.page + 1);
                                 navigate(`/list/${props.page + 1}`, { state: { workGroup: props.workGroup } });
                             }}
                             style={{ cursor: 'pointer', marginLeft: 20, marginRight: 20, marginBottom: 20 }}

@@ -32,6 +32,10 @@ const Main = ({ ...props }) => {
                 navigate('/');
             } finally {
                 if (res) {
+                    if(res.data === ''){
+                        alert('세션이 만료되어 로그아웃 되었습니다!');
+                        navigate('/');
+                    }
                     setUserData(res.data);
                     if (res.data.prefer.culture + res.data.prefer.pay === 0) {
                         setPreferList([
@@ -71,7 +75,7 @@ const Main = ({ ...props }) => {
 
             ncommute: Math.abs(userData.prefer.commute+1) * -20,
             npay: Math.abs(userData.prefer.pay+1) * 20,
-            nwelfare: Math.abs(userData.prefer.welfare+1) * -20,
+            nwelfare: Math.abs(userData.prefer.welfare+1) * -2,
             nculture: Math.abs(userData.prefer.culture+1) * -20,
             ntask: Math.abs(userData.prefer.task+1) * -20,
         };
