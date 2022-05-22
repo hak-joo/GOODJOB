@@ -11,6 +11,7 @@ import java.util.Optional;
 
 public interface CompanyRespository extends MongoRepository<Company, Long> {
     Optional<Company> findById(String id);
+    List<Company> findAll();
     List<Company> findAllByWorkGroup(String group);
     List<Company> findAllByWorkGroup(String group, Pageable pageable);
     Optional<Company> findByCompanyNameAndWorkGroup(String name, String group);

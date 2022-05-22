@@ -38,4 +38,9 @@ public class CompanyController {
         return companyList;
     }
 
+    @PostMapping("/searchList")
+    public CompanyWithPage searchList(@RequestBody CompanyDto companyDto){
+        CompanyWithPage companyList = companyService.getSearchResult(companyDto);
+        return companyList;
+    }
 }

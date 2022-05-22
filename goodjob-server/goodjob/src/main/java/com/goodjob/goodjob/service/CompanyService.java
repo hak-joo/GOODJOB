@@ -8,6 +8,9 @@ import com.goodjob.goodjob.repository.CompanyRespository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -19,7 +22,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CompanyService {
     private final CompanyRespository companyRespository;
-
+    private final MongoTemplate mongoTemplate;
 
     double getSimilarity (double[] com, double[] usr){
         double numerator = 0.0;
@@ -105,5 +108,43 @@ public class CompanyService {
             resultList.add(calculated.get(i));
         }
         return resultList;
+    }
+
+    @Transactional
+    public CompanyWithPage getSearchResult(CompanyDto companyDto){
+        Query query = new Query();
+        query.addCriteria(Criteria.where("company_name").regex(".*" + companyDto.getName() + ".*"));
+        if(!companyDto.getJob_group().equals("")){
+            query.addCriteria(Criteria.where("work_group").is(companyDto.getJob_group()));
+        }
+        List<Company> companyList = mongoTemplate.find(query, Company.class);
+        int totalNum = companyList.size();
+        List<CustomCompanyDto> calculated = new ArrayList<CustomCompanyDto>();
+        for(Company company: companyList){ //점수 측정
+            double[] com = {company.getPostComute(), company.getPostCulture(), company.getPostPay(), company.getPostTask(), company.getPostWelfare()};
+            double[] n_usr = {companyDto.getNcommute(), companyDto.getNculture(), companyDto.getNpay(), companyDto.getNtask(), companyDto.getNwelfare()};
+            double[] usr = {companyDto.getCommute(), companyDto.getCulture(), companyDto.getPay(), companyDto.getTask(), companyDto.getWelfare()};
+            CustomCompanyDto c = new CustomCompanyDto();
+            c.setName(company.getCompanyName());
+            c.setJob_group(company.getWorkGroup());
+            c.setSimillarity(getSimilarity(com, usr) + getSimilarity(com,n_usr));
+            calculated.add(c);
+        }
+        Collections.sort(calculated);
+        List<CustomCompanyDto> result = new ArrayList<CustomCompanyDto>();
+        int current = (companyDto.getPage()-1)*8;
+        int last = current + 8;
+        if(last > totalNum) last = totalNum;
+        if(current < last){
+            for(int i=current; i<last; i++){
+                result.add(calculated.get(i));
+            }
+        }
+        CompanyWithPage companyWithPage = new CompanyWithPage();
+        companyWithPage.setCompanyDtoList(result);
+        companyWithPage.setTotalPage(totalNum);
+        companyWithPage.setLastPage(totalNum/8 + 1);
+        return companyWithPage;
+
     }
 }
