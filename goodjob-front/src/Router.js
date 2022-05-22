@@ -13,6 +13,7 @@ import * as recoilItem from './util/recoilItem';
 import Footer from './footer/Footer';
 import Company from './views/company/Company';
 import CompanyList from './views/companylist/CompanyList';
+import Search from './views/search/Search';
 
 export default ({ match, location }) => {
     const [NavVisible, setNavVisible] = useState(true);
@@ -33,6 +34,7 @@ export default ({ match, location }) => {
                         <Route path="/" element={<Login />}></Route>
                         <Route path="/callback" element={<Login />}></Route>
                         <Route path="/company" element={<Company />}></Route>
+                        <Route path="/search" element={<Search />}></Route>
                         <Route path="/list/:page" element={<CompanyList />}></Route>
                     </Routes>
                 </WidthDiv>
