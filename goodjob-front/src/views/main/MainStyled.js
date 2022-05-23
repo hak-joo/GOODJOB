@@ -66,7 +66,7 @@ export const MainItem = styled(Link)`
     align-items: center;
     justify-content: center;
     background-color: #c8ead1;
-    border-right: ${(props) => (props.isLast ? 'none' : '1px solid white')};
+    border-right: ${(props) => (props.islast ? 'none' : '1px solid white')};
     flex-direction: column;
     cursor: pointer;
     &:hover {

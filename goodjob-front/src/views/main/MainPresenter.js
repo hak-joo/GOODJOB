@@ -43,11 +43,15 @@ const MainPresenter = ({ ...props }) => {
                         {userData ? <div>{userData.job_group} </div> : null}
                         <div>회사 리스트</div>
                     </s.MainItem>
-                    <s.MainItem to={`/search`} state = {{
-                        searchPage: 1,
-                        searchGroup: "",
-                        searchKeyword: ""
-                    }} isLast={true}>
+                    <s.MainItem
+                        to={`/search`}
+                        state={{
+                            searchPage: 1,
+                            searchGroup: '',
+                            searchKeyword: '',
+                        }}
+                        islast="true"
+                    >
                         검색
                     </s.MainItem>
                 </s.MainHeader>
@@ -57,10 +61,9 @@ const MainPresenter = ({ ...props }) => {
                     <Slider {...settings}>
                         {companyList.length > 0
                             ? companyList.map((company) => (
-                                  <s.CardContainer>
+                                  <s.CardContainer key={company.name}>
                                       <s.Card>
                                           <Link
-                                              key={company.name}
                                               to={`/company`}
                                               state={{
                                                   workGroup: userData.job_group,

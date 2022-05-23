@@ -5,7 +5,7 @@ import { BsArrowRightCircle } from 'react-icons/bs';
 import { Link, useNavigate } from 'react-router-dom';
 
 const CompanyListPresenter = ({...props}) => {
-    const {companyList,page, totalPage, workGroup} = props;
+    const {companyList, page, totalPage, workGroup} = props;
     const navigate = useNavigate();
     return (
         <s.Container>
@@ -47,6 +47,7 @@ const CompanyListPresenter = ({...props}) => {
                                       state={{
                                           workGroup: workGroup,
                                           company: item.name,
+                                          page: page
                                       }}
                                   >
                                       <s.CompanyTitle>{item.name}</s.CompanyTitle>

@@ -6,7 +6,7 @@ import { companyApi } from '../../api/api';
 const Company = ({...props}) => {
     const location = useLocation();
     const navigate = useNavigate();
-    const { workGroup, company, searchKeyword, searchGroup, searchPage} = location.state;
+    const { workGroup, company, searchKeyword, searchGroup, searchPage, page} = location.state;
 
     const [companyData, setCompanyData] = useState(null);
     const [avgData, setAvgData] = useState(null);
@@ -38,10 +38,23 @@ const Company = ({...props}) => {
             });
             return;
         } else{
-            navigate(-1);
+            navigate(`/list/${page}`);
         }
         
     };
+
+    const onClickAnalysisButton = () => {
+        navigate(`/company/analysis`, {
+            state: {
+                workGroup: workGroup,
+                company: company,
+                searchKeyword: searchKeyword,
+                searchGroup: searchGroup,
+                searchPage: searchPage,
+                page: page,
+            },
+        });
+    }
 
     useEffect(() => {
         fetchData();
@@ -54,6 +67,7 @@ const Company = ({...props}) => {
             searchGroup={searchGroup}
             searchPage={searchPage}
             onClickBackButton={onClickBackButton}
+            onClickAnalysisButton={onClickAnalysisButton}
         />
     );
 }

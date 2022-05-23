@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import { MdArrowBackIos } from 'react-icons/md';
 
 const CompanyPresenter = ({...props}) => {
-    const {companyData, avgData, onClickBackButton} = props;
+    const { companyData, avgData, onClickBackButton } = props;
     const [postList, setPostList] = useState(null);
     const [negList, setNegList] = useState(null);
 
@@ -84,14 +84,14 @@ const CompanyPresenter = ({...props}) => {
             <s.MainBlock>
                 {postList && companyData ? (
                     <>
-                      
                         <s.BackButtonArea>
                             <MdArrowBackIos size={30} color={'#3cb371'} cursor="pointer" onClick={onClickBackButton} />
                         </s.BackButtonArea>
-                       
-                        <s.CompanyInfoArea>
+
+                        <s.CompanyInfoArea onClick={props.onClickAnalysisButton}>
                             {companyData.companyName} - {companyData.workGroup}
                         </s.CompanyInfoArea>
+                        <s.CompanyLinkText>회사 전체 통계 조회를 희망한다면, 버튼을 클릭하세요</s.CompanyLinkText>
                         <s.CompanyGraphArea>
                             <s.GraphArea>
                                 <s.DescriptionText>장점</s.DescriptionText>

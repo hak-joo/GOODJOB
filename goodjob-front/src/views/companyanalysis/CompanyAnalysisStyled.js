@@ -16,7 +16,6 @@ export const Container = styled.div`
     overflow: scroll;
 `;
 
-
 export const MainBlock = styled.div`
     width: 100%;
     height: 100%;
@@ -46,21 +45,8 @@ export const CompanyInfoArea = styled.div`
     color: #3cb371;
     display: flex;
     align-items: center;
-    background-color: #f5f5f5;
-    padding-left: 20px;
-    padding-right: 20px;
-    border-radius: 10px;
-    cursor: pointer;
-    &:hover {
-        background-color: #e2e2e2;
-        font-weight: bolder;
-    }
 `;
 
-export const CompanyLinkText = styled.div`
-    color: #9a9898;
-    font-size: 13px;    
-`;
 
 export const DescriptionText = styled.div`
     font-size: 24px;
@@ -69,7 +55,6 @@ export const DescriptionText = styled.div`
 `;
 export const CompanyGraphArea = styled.div`
     flex: 8;
-    width: 70%;
     display: flex;
     flex-direction: row;
     justify-self: center;
