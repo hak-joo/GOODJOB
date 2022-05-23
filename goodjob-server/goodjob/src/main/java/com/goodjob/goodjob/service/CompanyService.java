@@ -5,6 +5,7 @@ import com.goodjob.goodjob.dto.CompanyDto;
 import com.goodjob.goodjob.dto.CompanyWithPage;
 import com.goodjob.goodjob.dto.CustomCompanyDto;
 import com.goodjob.goodjob.repository.CompanyRespository;
+import com.nimbusds.jose.shaded.json.parser.JSONParser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -49,7 +50,6 @@ public class CompanyService {
     public Company getInfo(CompanyDto companyDto){
         Company company = companyRespository.findByCompanyNameAndWorkGroup(companyDto.getName(), companyDto.getJob_group()).orElse(null);
         return company;
-
     }
 
     @Transactional
@@ -147,4 +147,43 @@ public class CompanyService {
         return companyWithPage;
 
     }
+
+    @Transactional
+    public CompanyDto getCompanyAnalysis(CompanyDto companyDto){
+        CompanyDto result = new CompanyDto();
+
+        List<Company> companyList = companyRespository.findAllByCompanyName(companyDto.getName());
+        if(companyList.size() == 0){
+            return null;
+        }
+        result.setName(companyList.get(0).getCompanyName());
+        result.setCompanyDto(0,0,0,0,0,0,0,0,0,0);
+        double arraySize = companyList.size();
+        double numerator = 1/arraySize;
+        System.out.println(companyList.size());
+        System.out.println(numerator);
+        for(int i=0; i<companyList.size(); i++){
+            result.setCompanyDto(
+                    result.getWelfare() + (companyList.get(i).getPostWelfare() * numerator),
+                    result.getPay() + (companyList.get(i).getPostPay() * numerator),
+                    result.getTask() + (companyList.get(i).getPostTask() * numerator),
+                    result.getCommute() + (companyList.get(i).getPostComute() * numerator),
+                    result.getCulture() + (companyList.get(i).getPostCulture()* numerator),
+                    result.getNwelfare() + (companyList.get(i).getNegWelfare()* numerator),
+                    result.getNpay() + (companyList.get(i).getNegPay()* numerator),
+                    result.getNcommute() + (companyList.get(i).getNegCommute()* numerator),
+                    result.getNtask() + (companyList.get(i).getNegTask()* numerator),
+                    result.getNculture() + (companyList.get(i).getNegCulture()* numerator)
+            );
+        }
+
+        return result;
+    }
+
+    @Transactional
+    public List<Company> getCompanyList(CompanyDto companyDto){
+        List<Company> companyList = companyRespository.findAllByCompanyName(companyDto.getName());
+        return companyList;
+    }
+
 }

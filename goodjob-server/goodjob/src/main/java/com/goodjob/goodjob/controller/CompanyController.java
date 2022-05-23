@@ -43,4 +43,16 @@ public class CompanyController {
         CompanyWithPage companyList = companyService.getSearchResult(companyDto);
         return companyList;
     }
+
+    @PostMapping("/companyAnalysis")
+    public CompanyDto companyAnalysis(@RequestBody CompanyDto companyDto){
+        CompanyDto result = companyService.getCompanyAnalysis(companyDto);
+        return result;
+    }
+
+    @PostMapping("/getListCompany")
+    public List<Company> getCompanyList(@RequestBody CompanyDto companyDto){
+        List<Company> result = companyService.getCompanyList(companyDto);
+        return result;
+    }
 }
