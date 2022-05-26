@@ -6,7 +6,7 @@ export const Container = styled.div`
     margin-top: 3rem;
     box-shadow: 0px 0px 10px #f3f6fb;
     margin-bottom: 300px;
-    height: 80%;
+    height: 85%;
     display: inline-block;
     background-color: white;
     width: 85%;
@@ -15,7 +15,6 @@ export const Container = styled.div`
     }
     overflow: scroll;
 `;
-
 
 export const MainBlock = styled.div`
     width: 100%;
@@ -32,13 +31,6 @@ export const MainBlock = styled.div`
         min-height: 650px;
     } */
 `;
-export const BackButtonArea = styled.div`
-    flex: 0.3;
-    width: 95%;
-    display: flex;
-    margin: 10px 10px;
-    justify-self: left;
-`;
 
 export const CompanyInfoArea = styled.div`
     flex: 1;
@@ -47,20 +39,29 @@ export const CompanyInfoArea = styled.div`
     color: #3cb371;
     display: flex;
     align-items: center;
-    background-color: #f5f5f5;
-    padding-left: 20px;
-    padding-right: 20px;
-    border-radius: 10px;
-    cursor: pointer;
-    &:hover {
-        background-color: #e2e2e2;
-        font-weight: bolder;
-    }
+    
 `;
 
-export const CompanyLinkText = styled.div`
-    color: #9a9898;
-    font-size: 13px;    
+export const flex1Area = styled.div`
+    flex: 1;
+`;
+
+
+export const SelectArea = styled.div`
+    width: 80%;
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+`;
+
+export const BackButtonArea = styled.div`
+    flex: 0.3;
+    width: 95%;
+    display: flex;
+    margin: 10px 10px;
+    justify-self: left;
 `;
 
 export const DescriptionText = styled.div`
@@ -69,7 +70,7 @@ export const DescriptionText = styled.div`
     margin-bottom: 10px;
 `;
 export const CompanyGraphArea = styled.div`
-    flex: 8;
+    flex: 5;
     width: 70%;
     display: flex;
     flex-direction: row;

@@ -33,7 +33,7 @@ const MainPresenter = ({ ...props }) => {
         <s.Container>
             <s.MainBlock>
                 <s.MainHeader>
-                    <s.MainItem to={`/main`}>기업별 통계조회</s.MainItem>
+                    <s.MainItem to={`/jobgroup`}>직군별 통계비교</s.MainItem>
                     <s.MainItem
                         to={`/list/1`}
                         state={{

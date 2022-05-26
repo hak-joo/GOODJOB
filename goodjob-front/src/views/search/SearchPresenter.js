@@ -8,9 +8,10 @@ import Select from 'react-select';
 import { jobGroupList } from '../../util/jobGroupList';
 
 const SearchPresenter = ({ ...props }) => {
-    const { companyList, page, totalPage, jobGroup, onChangeJobGroup, onClickSearchButton, keyword, onChangeKeyword, onKeyPressKeyword } =
+    const { companyList, page, totalPage, jobGroup, onChangeJobGroup, onClickSearchButton, keyword, onChangeKeyword, onKeyPressKeyword, userData } =
         props;
     const navigate = useNavigate();
+
     return (
         <s.Container>
             <s.MainBlock>
@@ -18,11 +19,15 @@ const SearchPresenter = ({ ...props }) => {
                     <s.MainItem to={`/main`}>
                         <div>사용자 추천</div>
                     </s.MainItem>
-                    <s.MainItem to={`/main`}>
-                        <div>직군 비교</div>
-                    </s.MainItem>
-                    <s.MainItem to={`/main`}>
-                        <div>검색</div>
+                    <s.MainItem to={`/jobgroup`}>직군별 통계비교</s.MainItem>
+                    <s.MainItem
+                        to={`/list/1`}
+                        state={{
+                            workGroup: userData ? userData.job_group : null,
+                        }}
+                    >
+                        {userData ? <div>{userData.job_group} </div> : null}
+                        <div>회사 리스트</div>
                     </s.MainItem>
                 </s.MainHeader>
                 <s.CompanyListHeader>
@@ -44,7 +49,7 @@ const SearchPresenter = ({ ...props }) => {
                         placeholder="회사명을 입력해주세요"
                         value={keyword}
                         onChange={onChangeKeyword}
-                        onKeyPress = {onKeyPressKeyword}
+                        onKeyPress={onKeyPressKeyword}
                     />
                     <AiOutlineSearch size={30} style={{ color: '#3cb371', cursor: 'pointer' }} onClick={onClickSearchButton} />
                 </s.CompanyListHeader>
@@ -56,25 +61,29 @@ const SearchPresenter = ({ ...props }) => {
                         <s.FitRate>적합율</s.FitRate>
                     </s.ListHeader>
                     <s.ListItemArea>
-                        {companyList !== null
-                            ? companyList.map((item) => (
-                                  <s.ListItem
-                                      key={item.name + item.job_group}
-                                      to={`/company`}
-                                      state={{
-                                          workGroup: item.job_group,
-                                          company: item.name,
-                                          searchGroup: jobGroup,
-                                          searchKeyword: keyword,
-                                          searchPage: page,
-                                      }}
-                                  >
-                                      <s.CompanyTitle>{item.name}</s.CompanyTitle>
-                                      <s.WorkGroup>{item.job_group}</s.WorkGroup>
-                                      <s.FitRate>{Math.floor(item.simillarity * 50)}</s.FitRate>
-                                  </s.ListItem>
-                              ))
-                            : null}
+                        {companyList !== null ? (
+                            companyList.length === 0 ? (
+                                <s.NoData>조건을 만족하는 데이터가 없습니다</s.NoData>
+                            ) : (
+                                companyList.map((item) => (
+                                    <s.ListItem
+                                        key={item.name + item.job_group}
+                                        to={`/company`}
+                                        state={{
+                                            workGroup: item.job_group,
+                                            company: item.name,
+                                            searchGroup: jobGroup,
+                                            searchKeyword: keyword,
+                                            searchPage: page,
+                                        }}
+                                    >
+                                        <s.CompanyTitle>{item.name}</s.CompanyTitle>
+                                        <s.WorkGroup>{item.job_group}</s.WorkGroup>
+                                        <s.FitRate>{Math.floor(item.simillarity * 50)}</s.FitRate>
+                                    </s.ListItem>
+                                ))
+                            )
+                        ) : null}
                     </s.ListItemArea>
                 </s.ListArea>
                 <s.Pagenation>

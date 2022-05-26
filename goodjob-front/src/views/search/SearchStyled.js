@@ -85,6 +85,14 @@ export const CompanySearch = styled.input`
     
 `;
 
+export const NoData = styled.div`
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #7f7c7c;
+    font-weight: bold;
+`;
 
 export const ListArea = styled.div`
     width: 100%;

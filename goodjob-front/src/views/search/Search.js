@@ -131,6 +131,7 @@ const SearchContainer = ({ ...props }) => {
             onChangeKeyword={onChangeKeyword}
             onClickSearchButton={onClickSearchButton}
             onKeyPressKeyword={onKeyPressKeyword}
+            userData = {userData}
         />
     );
 };

@@ -26,10 +26,10 @@ const GlobalStyles = createGlobalStyle`
 export default GlobalStyles;
 
 ReactDOM.createRoot(rootNode).render(
-
-        <RecoilRoot>
-            <GlobalStyles/>
-            <App match = {useMatch} location = {useLocation}/>
-        </RecoilRoot>
-
+    <RecoilRoot>
+        <React.Suspense fallback={<div>Loading..</div>}>
+            <GlobalStyles />
+            <App match={useMatch} location={useLocation} />
+        </React.Suspense>
+    </RecoilRoot>
 );

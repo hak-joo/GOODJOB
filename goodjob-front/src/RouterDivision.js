@@ -6,10 +6,10 @@ export const RouterDivision = styled.div`
     text-align: center;
     width: 100%;
     background-color: #f2f2f2;
-    height: 950px;
+    height: 1000px;
 
     @media screen and (max-height: 767px) {
-        height: 850px;
+        height: 1080px;
     }
 
     @media screen and (min-width: 1180px) {
