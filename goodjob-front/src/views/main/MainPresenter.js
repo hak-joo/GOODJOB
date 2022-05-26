@@ -75,7 +75,7 @@ const MainPresenter = ({ ...props }) => {
                                                   <s.CompanyName>{company.name}</s.CompanyName>
                                                   <s.Similarity>
                                                       <s.SimilarityDes>적합도</s.SimilarityDes>
-                                                      <s.SimilarityNum>{Math.floor(company.simillarity * 100)}%</s.SimilarityNum>
+                                                      <s.SimilarityNum>{Math.floor(company.simillarity * 50)}%</s.SimilarityNum>
                                                   </s.Similarity>
                                               </s.CardContent>
                                           </Link>

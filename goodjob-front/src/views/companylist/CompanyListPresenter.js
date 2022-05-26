@@ -29,7 +29,7 @@ const CompanyListPresenter = ({...props}) => {
                     </s.MainItem>
                 </s.MainHeader>
                 <s.CompanyListHeader>
-                    <s.MainTitle>회사리스트</s.MainTitle>
+                    <s.MainTitle>{workGroup + " 회사리스트"}</s.MainTitle>
                 </s.CompanyListHeader>
 
                 <s.ListArea>
@@ -52,7 +52,7 @@ const CompanyListPresenter = ({...props}) => {
                                   >
                                       <s.CompanyTitle>{item.name}</s.CompanyTitle>
                                       <s.WorkGroup>{item.job_group}</s.WorkGroup>
-                                      <s.FitRate>{Math.floor(item.simillarity * 100)}</s.FitRate>
+                                      <s.FitRate>{Math.floor(item.simillarity * 50)}</s.FitRate>
                                   </s.ListItem>
                               ))
                             : null}

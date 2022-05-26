@@ -67,18 +67,19 @@ const Main = ({ ...props }) => {
 
         const formData = {
             job_group: userData.job_group,
-            commute: Math.abs(userData.prefer.commute - 5) * 20,
-            pay: Math.abs(userData.prefer.pay - 5) * 20,
-            welfare: Math.abs(userData.prefer.welfare - 5) * 20,
-            culture: Math.abs(userData.prefer.culture - 5) * 20,
-            task: Math.abs(userData.prefer.task - 5) * 20,
+            commute: Math.pow(2, Math.abs(userData.prefer.commute - 4)),
+            pay: Math.pow(2, Math.abs(userData.prefer.pay - 4)),
+            welfare: Math.pow(2, Math.abs(userData.prefer.welfare - 4)),
+            culture: Math.pow(2, Math.abs(userData.prefer.culture - 4)),
+            task: Math.pow(2, Math.abs(userData.prefer.task - 4)),
 
-            ncommute: Math.abs(userData.prefer.commute+1) * -20,
-            npay: Math.abs(userData.prefer.pay+1) * 20,
-            nwelfare: Math.abs(userData.prefer.welfare+1) * -20,
-            nculture: Math.abs(userData.prefer.culture+1) * -20,
-            ntask: Math.abs(userData.prefer.task+1) * -20,
+            ncommute: Math.pow(2, Math.abs(userData.prefer.commute - 3)),
+            npay: Math.pow(2, Math.abs(userData.prefer.pay - 3)),
+            nwelfare: Math.pow(2, Math.abs(userData.prefer.welfare - 3)),
+            nculture: Math.pow(2, Math.abs(userData.prefer.culture - 3)),
+            ntask: Math.pow(2, Math.abs(userData.prefer.task - 3)),
         };
+        console.log(formData);
 
         let res = null;
         try {

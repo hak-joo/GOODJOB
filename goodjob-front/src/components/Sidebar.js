@@ -117,6 +117,7 @@ const Sidebar = ({ ...props }) => {
             return;
         }
         let json = {};
+        
         for (var i = 0; i < preferList.length; i++) {
             let name = preferList[i].name;
             let rank = preferList[i].rank;
@@ -148,7 +149,7 @@ const Sidebar = ({ ...props }) => {
 
     useEffect(() => {
         fetchData();
-    }, [token, state]);
+    }, [token, state, updated]);
 
     return (
         <>
