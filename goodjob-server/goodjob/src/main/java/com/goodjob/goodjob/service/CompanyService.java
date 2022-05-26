@@ -54,7 +54,7 @@ public class CompanyService {
 
     @Transactional
     public CompanyWithPage getList(CompanyDto companyDto){
-        Pageable pageable = PageRequest.of(companyDto.getPage(), 8);
+        Pageable pageable = PageRequest.of(companyDto.getPage(), 10);
         List<Company> companyList = companyRespository.findAllByWorkGroup(companyDto.getJob_group());
         int totalNum = companyList.size();
         List<CustomCompanyDto> calculated = new ArrayList<CustomCompanyDto>();
@@ -70,8 +70,9 @@ public class CompanyService {
         }
         Collections.sort(calculated);
         List<CustomCompanyDto> result = new ArrayList<CustomCompanyDto>();
-        int current = (companyDto.getPage()-1)*8;
-        int last = current + 8;
+        int page = companyDto.getPage() == 0 ? 1: companyDto.getPage();
+        int current = (page-1)*10;
+        int last = current + 10;
         if(last > totalNum) last = totalNum;
         if(current < last){
             for(int i=current; i<last; i++){
@@ -81,7 +82,7 @@ public class CompanyService {
         CompanyWithPage companyWithPage = new CompanyWithPage();
         companyWithPage.setCompanyDtoList(result);
         companyWithPage.setTotalPage(totalNum);
-        companyWithPage.setLastPage(totalNum/8 + 1);
+        companyWithPage.setLastPage(totalNum/10 + 1);
         return companyWithPage;
     }
 
@@ -132,8 +133,8 @@ public class CompanyService {
         }
         Collections.sort(calculated);
         List<CustomCompanyDto> result = new ArrayList<CustomCompanyDto>();
-        int current = (companyDto.getPage()-1)*8;
-        int last = current + 8;
+        int current = (companyDto.getPage()-1)*10;
+        int last = current + 10;
         if(last > totalNum) last = totalNum;
         if(current < last){
             for(int i=current; i<last; i++){
@@ -143,7 +144,7 @@ public class CompanyService {
         CompanyWithPage companyWithPage = new CompanyWithPage();
         companyWithPage.setCompanyDtoList(result);
         companyWithPage.setTotalPage(totalNum);
-        companyWithPage.setLastPage(totalNum/8 + 1);
+        companyWithPage.setLastPage(totalNum/10 + 1);
         return companyWithPage;
 
     }
@@ -160,8 +161,7 @@ public class CompanyService {
         result.setCompanyDto(0,0,0,0,0,0,0,0,0,0);
         double arraySize = companyList.size();
         double numerator = 1/arraySize;
-        System.out.println(companyList.size());
-        System.out.println(numerator);
+
         for(int i=0; i<companyList.size(); i++){
             result.setCompanyDto(
                     result.getWelfare() + (companyList.get(i).getPostWelfare() * numerator),

@@ -14,7 +14,7 @@ import javax.persistence.Column;
 @Getter
 @Setter
 @Data
-@Document(collection = "counting")
+@Document(collection = "stat")
 @ToString
 public class Company{
     private String id;

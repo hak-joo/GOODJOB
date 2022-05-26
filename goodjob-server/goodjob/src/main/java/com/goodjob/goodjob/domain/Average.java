@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Getter
 @Setter
 @Data
-@Document(collection = "avg")
+@Document(collection = "average")
 @ToString
 public class Average {
     private String id;
