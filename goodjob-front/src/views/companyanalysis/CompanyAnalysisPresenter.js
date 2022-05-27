@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import * as s from './CompanyAnalysisStyled';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Legend } from 'recharts';
-import { useNavigate } from 'react-router-dom';
 import { MdArrowBackIos } from 'react-icons/md';
 import Select from 'react-select';
 

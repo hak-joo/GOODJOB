@@ -6,7 +6,7 @@ import { FiLogOut } from 'react-icons/fi';
 
 import * as recoilItem from '../util/recoilItem';
 import * as s from './SidebarStyled';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState} from 'recoil';
 import { userApi } from '../api/api';
 import { useNavigate } from 'react-router-dom';
 import { jobGroupList } from '../util/jobGroupList';

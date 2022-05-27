@@ -3,14 +3,12 @@ import * as s from './SearchStyled';
 import { BsArrowLeftCircle } from 'react-icons/bs';
 import { BsArrowRightCircle } from 'react-icons/bs';
 import {AiOutlineSearch} from 'react-icons/ai';
-import { Link, useNavigate } from 'react-router-dom';
 import Select from 'react-select';
 import { jobGroupList } from '../../util/jobGroupList';
 
 const SearchPresenter = ({ ...props }) => {
     const { companyList, page, totalPage, jobGroup, onChangeJobGroup, onClickSearchButton, keyword, onChangeKeyword, onKeyPressKeyword, userData } =
         props;
-    const navigate = useNavigate();
 
     return (
         <s.Container>

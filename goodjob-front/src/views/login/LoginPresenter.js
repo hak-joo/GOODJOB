@@ -1,7 +1,5 @@
 import React,{useEffect} from 'react';
 import * as s from './LoginStyled';
-import { Link } from 'react-router-dom';
-import * as c from '../../config/config';
 
 const LoginPresenter = ({...props}) => {
     

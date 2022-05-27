@@ -8,7 +8,6 @@ import {
     PolarRadiusAxis,
     Legend,
 } from 'recharts';
-import { useNavigate } from 'react-router-dom';
 import { MdArrowBackIos } from 'react-icons/md';
 
 const CompanyPresenter = ({...props}) => {
@@ -128,31 +127,6 @@ const CompanyPresenter = ({...props}) => {
                                 </RadarChart>
                             </s.GraphArea>
                         </s.CompanyGraphArea>
-                        {/* <BarChart width={730} height={250} data={dataList}>
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="name" />
-                            <YAxis />
-                            <Tooltip />
-                            <Legend />
-                            <Bar dataKey="postCulture" fill="#8884d8" />
-                            <Bar dataKey="postPay" fill="#82ca9d" />
-                        </BarChart> */}
-
-                        {/* <ComposedChart width={800} height={400} data={dataList} margin={{ top: 40, right: 40, bottom: 30, left: 40 }}>
-                            <XAxis dataKey="postCulture" />
-                            <XAxis dataKey="postPay" />
-                            <XAxis dataKey="postCommute" />
-                            <XAxis dataKey="postTask" />
-                            <XAxis dataKey="postWelfare" />
-
-                            <Tooltip />
-                            <Legend />
-                            <Bar barSize={20} dataKey="postCulture" fill="#153D77" />
-                            <Bar barSize={20} dataKey="postPay" fill="#153D77" />
-                            <Bar barSize={20} dataKey="postCommute" fill="#153D77" />
-                            <Bar barSize={20} dataKey="postTask" fill="#153D77" />
-                            <Bar barSize={20} dataKey="postWelfare" fill="#153D77" />
-                        </ComposedChart> */}
                     </>
                 ) : null}
             </s.MainBlock>

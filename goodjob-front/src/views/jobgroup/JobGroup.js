@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
 import JobGroupPresenter from './JobGroupPresenter';
 import { companyApi } from '../../api/api';
 
@@ -37,7 +36,6 @@ const JobGroup = ({ ...props }) => {
     }
 
     const onChangeGroupList1 = (e) => {
-        console.log(e);
         setJobGroup1(e.value);
     }
     const onChangeGroupList2 = (e) =>{

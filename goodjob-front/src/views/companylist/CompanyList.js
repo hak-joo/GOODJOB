@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import CompanyListPresenter from './CompanyListPresenter';
 import { companyApi, userApi } from '../../api/api';
 import { useRecoilValue } from 'recoil';
 import * as recoilItem from '../../util/recoilItem';
 
 const CompanyListContainer = ({ ...props }) => {
-    const location = useLocation();
     const navigate = useNavigate();
-    const keyword = useState('');
     
     const [userData, setUserData] = useState(null);
     const token = useRecoilValue(recoilItem.access_token);
@@ -16,7 +14,6 @@ const CompanyListContainer = ({ ...props }) => {
     const [companyList, setCompanyList] = useState([]);
     const [workGroup, setWorkGroup] = useState('');
 
-    // const [page, setPage] = useState(1);
     const [totalPage, setTotalPage] = useState(1);
     const param = useParams();
     const [page, setPage] = useState(param.page? parseInt(param.page) : 1);
@@ -34,7 +31,7 @@ const CompanyListContainer = ({ ...props }) => {
             try {
                 res = await userApi.getUser(formData);
             } catch (e) {
-                alert('잘못된 접근입니다.');
+                alert('세션이 만료되어 로그아웃 되었습니다!');
                 navigate('/');
             } finally {
                 if (res) {

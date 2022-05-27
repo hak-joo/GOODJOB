@@ -79,7 +79,6 @@ const Main = ({ ...props }) => {
             nculture: Math.pow(2, Math.abs(userData.prefer.culture - 3)),
             ntask: Math.pow(2, Math.abs(userData.prefer.task - 3)),
         };
-        console.log(formData);
 
         let res = null;
         try {

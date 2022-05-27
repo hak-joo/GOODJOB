@@ -4,7 +4,6 @@ import SearchPresenter from './SearchPresenter';
 import { companyApi, userApi } from '../../api/api';
 import { useRecoilValue } from 'recoil';
 import * as recoilItem from '../../util/recoilItem';
-import { jobGroupList } from '../../util/jobGroupList';
 
 const SearchContainer = ({ ...props }) => {
     const param = useParams();
@@ -20,7 +19,6 @@ const SearchContainer = ({ ...props }) => {
     const [companyList, setCompanyList] = useState([]);
     const [jobGroup, setJobGroup] = useState(searchGroup ? searchGroup : '');
 
-    // const [page, setPage] = useState(1);
     const [totalPage, setTotalPage] = useState(1);
     const [page, setPage] = useState(searchPage ? searchPage : 1);
     
@@ -79,7 +77,6 @@ const SearchContainer = ({ ...props }) => {
 
         try {
             res = await companyApi.getSearchList(formData);
-            console.log(res);
         } catch (e) {
         } finally {
             setCompanyList(res.data.companyDtoList);
@@ -91,7 +88,6 @@ const SearchContainer = ({ ...props }) => {
         setKeyword(e.target.value);
     };
     const onKeyPressKeyword = (e) => {
-        console.log(e.key);
         if(e.key === 'Enter'){
             onClickSearchButton();
         }

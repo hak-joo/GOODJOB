@@ -1,4 +1,3 @@
-import { API_SERVER } from "../config/config";
 import { baseApi} from "./api-base";
 
 export const userApi = {
