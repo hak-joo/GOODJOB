@@ -16,6 +16,7 @@ import CompanyList from './views/companylist/CompanyList';
 import Search from './views/search/Search';
 import CompanyAnalysis from './views/companyanalysis/CompanyAnalysis';
 import JobGroup from './views/jobgroup/JobGroup';
+import Wellknown from './well-known';
 
 export default ({ match, location }) => {
     const [NavVisible, setNavVisible] = useState(true);
@@ -40,6 +41,7 @@ export default ({ match, location }) => {
                         <Route path="/list/:page" element={<CompanyList />}></Route>
                         <Route path="/company/analysis" element={<CompanyAnalysis />}></Route>
                         <Route path = "/jobgroup" element ={<JobGroup/>}></Route>
+                        <Route path = ".well-known/acme-challenge" element={<Wellknown/>}></Route>
                     </Routes>
                 </WidthDiv>
             </RouterDivision>

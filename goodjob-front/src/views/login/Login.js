@@ -8,7 +8,7 @@ import * as recoilItem from '../../util/recoilItem';
 
 const LoginContainer = ({}) => {
     const navigate = useNavigate();
-    const { naver } = window;
+    const { naver } = window    ;
 
     const [token, setToken] = useRecoilState(recoilItem.access_token);
     const [state, setState] = useRecoilState(recoilItem.state_token);
@@ -29,8 +29,10 @@ const LoginContainer = ({}) => {
             code: code,
             state: state,
         };
+        console.log(formData)
         try {
             res = await userApi.login(formData);
+            console.log(res);
         } catch (e) {
         } finally {
             if (res.status === 200) {
