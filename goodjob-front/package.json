@@ -27,8 +27,8 @@
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
-        "deploy": "aws s3 sync ./build s3://capstone-front --profile=capstone-front",
-        "invalidate": "aws cloudfront create-invalidation --profile=capstone-front --distribution-id E1AUQ03VV9I2Z6 --paths / /index.html /error.html /service-worker.js /manifest.json /favicon.ico"
+        "deploy": "aws s3 sync ./build s3://good-job --profile=capstone-front",
+        "invalidate": "aws cloudfront create-invalidation --profile=capstone-front --distribution-id ENVLN51DT3RMY --paths / /index.html /error.html /service-worker.js /manifest.json /favicon.ico"
     },
     "eslintConfig": {
         "extends": [
@@ -36,6 +36,7 @@
             "react-app/jest"
         ]
     },
+    "homepage": "https://good-job.netlify.app"
     "browserslist": {
         "production": [
             ">0.2%",
