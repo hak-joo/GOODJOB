@@ -36,7 +36,7 @@
             "react-app/jest"
         ]
     },
-    "homepage": "https://good-job.netlify.app"
+    "homepage": "https://good-job.netlify.app",
     "browserslist": {
         "production": [
             ">0.2%",
