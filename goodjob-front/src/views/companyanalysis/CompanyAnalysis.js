@@ -15,7 +15,6 @@ const CompanyAnalysis = ({ ...props }) => {
     const [companyList, setCompanyList] = useState([]);
     const [avgData, setAvgData] = useState(null);
     const fetchData = async () => {
-        console.log(location.state);
         let formData = {
             name: company,
             job_group: selectedWorkGroup

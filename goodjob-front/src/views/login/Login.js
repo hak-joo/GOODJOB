@@ -47,7 +47,7 @@ const LoginContainer = ({}) => {
     };
 
     const TokenCheck = async () => {
-        if (token == '' || !token || state == '' || !state) {
+        if (token === '' || !token || state === '' || !state) {
             return;
         } else {
             let res = null;
@@ -58,7 +58,7 @@ const LoginContainer = ({}) => {
             res = await userApi.login(form);
 
             if (res) {
-                if (res.data == '') {
+                if (res.data === '') {
                     localStorage.clear();
                     return;
                 } else {

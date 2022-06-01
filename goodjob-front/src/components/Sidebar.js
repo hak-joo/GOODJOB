@@ -47,7 +47,7 @@ const Sidebar = ({ ...props }) => {
             } finally {
                 if (res) {
                     setUserData(res.data);
-                    if (res.data.prefer.culture + res.data.prefer.pay == 0) {
+                    if (res.data.prefer.culture + res.data.prefer.pay === 0) {
                         setPreferList([
                             { title: '문화', rank: 0, name: 'culture' },
                             { title: '급여', rank: 1, name: 'pay' },
