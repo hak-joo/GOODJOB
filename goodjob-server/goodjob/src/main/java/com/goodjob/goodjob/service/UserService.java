@@ -60,10 +60,8 @@ public class UserService {
                 UserDto userDto = UserDto.builder()
                         .id(jsonObject.get("response").getAsJsonObject().get("id").getAsString())
                         .name(jsonObject.get("response").getAsJsonObject().get("name").getAsString())
-                        .gender(jsonObject.get("response").getAsJsonObject().get("gender").getAsString())
-                        .birthyear(jsonObject.get("response").getAsJsonObject().get("birthyear").getAsString())
-                        .birthday(jsonObject.get("response").getAsJsonObject().get("birthday").getAsString())
                         .email(jsonObject.get("response").getAsJsonObject().get("email").getAsString())
+                        .gender(jsonObject.get("response").getAsJsonObject().get("gender").getAsString())
                         .build();
                 return userDto;
             }
@@ -78,10 +76,8 @@ public class UserService {
     public User register(UserDto userDto){
         Prefer prefer = new Prefer();
         User user = User.builder()
-                .birthyear(userDto.getBirthyear())
                 .gender(userDto.getGender())
                 .name(userDto.getName())
-                .birthday(userDto.getBirthday())
                 .email(userDto.getEmail())
                 .prefer(prefer)
                 .build();
@@ -101,11 +97,5 @@ public class UserService {
             userRepository.save(user);
             return "SUCCESS";
         }
-
     }
-
-
-
-
-
 }

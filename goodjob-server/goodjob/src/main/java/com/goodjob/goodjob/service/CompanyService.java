@@ -1,11 +1,12 @@
 package com.goodjob.goodjob.service;
 
+import com.goodjob.goodjob.domain.Average;
 import com.goodjob.goodjob.domain.Company;
 import com.goodjob.goodjob.dto.CompanyDto;
 import com.goodjob.goodjob.dto.CompanyWithPage;
 import com.goodjob.goodjob.dto.CustomCompanyDto;
+import com.goodjob.goodjob.repository.AverageRepository;
 import com.goodjob.goodjob.repository.CompanyRespository;
-import com.nimbusds.jose.shaded.json.parser.JSONParser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -24,6 +25,7 @@ import java.util.List;
 public class CompanyService {
     private final CompanyRespository companyRespository;
     private final MongoTemplate mongoTemplate;
+    private final AverageRepository averageRepository;
 
     double getSimilarity (double[] com, double[] usr){
         double numerator = 0.0;
@@ -44,8 +46,6 @@ public class CompanyService {
     }
 
 
-
-
     @Transactional
     public Company getInfo(CompanyDto companyDto){
         Company company = companyRespository.findByCompanyNameAndWorkGroup(companyDto.getName(), companyDto.getJob_group()).orElse(null);
@@ -58,8 +58,9 @@ public class CompanyService {
         List<Company> companyList = companyRespository.findAllByWorkGroup(companyDto.getJob_group());
         int totalNum = companyList.size();
         List<CustomCompanyDto> calculated = new ArrayList<CustomCompanyDto>();
+        Average average = averageRepository.findByWorkGroup(companyDto.getJob_group()).orElse(null);
         for(Company company: companyList){ //점수 측정
-            double[] com = {company.getPostComute(), company.getPostCulture(), company.getPostPay(), company.getPostTask(), company.getPostWelfare()};
+            double[] com = {company.getPostComute() - average.getPostComute() , company.getPostCulture() - average.getPostCulture(), company.getPostPay() - average.getPostPay(), company.getPostTask() - average.getPostTask(), company.getPostWelfare()-average.getPostWelfare()};
             double[] n_usr = {companyDto.getNcommute(), companyDto.getNculture(), companyDto.getNpay(), companyDto.getNtask(), companyDto.getNwelfare()};
             double[] usr = {companyDto.getCommute(), companyDto.getCulture(), companyDto.getPay(), companyDto.getTask(), companyDto.getWelfare()};
             CustomCompanyDto c = new CustomCompanyDto();
@@ -90,9 +91,10 @@ public class CompanyService {
     public List<CustomCompanyDto> getCustomList(CompanyDto companyDto){
         List<Company> companyList = companyRespository.findAllByWorkGroup(companyDto.getJob_group());
         List<CustomCompanyDto> calculated = new ArrayList<CustomCompanyDto>();
-        System.out.println(companyDto);
+        Average average = averageRepository.findByWorkGroup(companyDto.getJob_group()).orElse(null);
         for(Company company: companyList){ //점수 측정
-            double[] com = {company.getPostComute(), company.getPostCulture(), company.getPostPay(), company.getPostTask(), company.getPostWelfare()};
+            double[] com = {company.getPostComute() - average.getPostComute() , company.getPostCulture() - average.getPostCulture(), company.getPostPay() - average.getPostPay(), company.getPostTask() - average.getPostTask(), company.getPostWelfare()-average.getPostWelfare()};
+//            double[] com = {company.getPostComute(), company.getPostCulture(), company.getPostPay(), company.getPostTask(), company.getPostWelfare()};
             double[] n_usr = {companyDto.getNcommute(), companyDto.getNculture(), companyDto.getNpay(), companyDto.getNtask(), companyDto.getNwelfare()};
             double[] usr = {companyDto.getCommute(), companyDto.getCulture(), companyDto.getPay(), companyDto.getTask(), companyDto.getWelfare()};
             CustomCompanyDto c = new CustomCompanyDto();
@@ -118,11 +120,12 @@ public class CompanyService {
         if(!companyDto.getJob_group().equals("")){
             query.addCriteria(Criteria.where("work_group").is(companyDto.getJob_group()));
         }
+        Average average = averageRepository.findByWorkGroup(companyDto.getJob_group()).orElse(null);
         List<Company> companyList = mongoTemplate.find(query, Company.class);
         int totalNum = companyList.size();
         List<CustomCompanyDto> calculated = new ArrayList<CustomCompanyDto>();
         for(Company company: companyList){ //점수 측정
-            double[] com = {company.getPostComute(), company.getPostCulture(), company.getPostPay(), company.getPostTask(), company.getPostWelfare()};
+            double[] com = {company.getPostComute() - average.getPostComute() , company.getPostCulture() - average.getPostCulture(), company.getPostPay() - average.getPostPay(), company.getPostTask() - average.getPostTask(), company.getPostWelfare()-average.getPostWelfare()};
             double[] n_usr = {companyDto.getNcommute(), companyDto.getNculture(), companyDto.getNpay(), companyDto.getNtask(), companyDto.getNwelfare()};
             double[] usr = {companyDto.getCommute(), companyDto.getCulture(), companyDto.getPay(), companyDto.getTask(), companyDto.getWelfare()};
             CustomCompanyDto c = new CustomCompanyDto();

@@ -28,7 +28,6 @@ public class CompanyController {
     @PostMapping("/info")
     public Company info(@RequestBody CompanyDto companyDto){
         Company company = companyService.getInfo(companyDto);
-        System.out.println(company);
         return company;
     }
 
