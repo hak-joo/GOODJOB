@@ -11,6 +11,7 @@ const CompanyListContainer = ({ ...props }) => {
     const [userData, setUserData] = useState(null);
     const token = useRecoilValue(recoilItem.access_token);
     const state = useRecoilValue(recoilItem.state_token);
+    const updated = useRecoilValue(recoilItem.user_update_count);
     const [companyList, setCompanyList] = useState([]);
     const [workGroup, setWorkGroup] = useState('');
 
@@ -55,11 +56,11 @@ const CompanyListContainer = ({ ...props }) => {
             culture: Math.pow(2, Math.abs(userData.prefer.culture - 4)),
             task: Math.pow(2, Math.abs(userData.prefer.task - 4)),
 
-            ncommute: Math.pow(2, Math.abs(userData.prefer.commute - 3)),
-            npay: Math.pow(2, Math.abs(userData.prefer.pay - 3)),
-            nwelfare: Math.pow(2, Math.abs(userData.prefer.welfare - 3)),
-            nculture: Math.pow(2, Math.abs(userData.prefer.culture - 3)),
-            ntask: Math.pow(2, Math.abs(userData.prefer.task - 3)),
+            ncommute: Math.pow(2, Math.abs(userData.prefer.commute)),
+            npay: Math.pow(2, Math.abs(userData.prefer.pay)) ,
+            nwelfare: Math.pow(2, Math.abs(userData.prefer.welfare)) ,
+            nculture: Math.pow(2, Math.abs(userData.prefer.culture)) ,
+            ntask: Math.pow(2, Math.abs(userData.prefer.task)) ,
         };
 
         let res = null;
@@ -79,11 +80,10 @@ const CompanyListContainer = ({ ...props }) => {
     useEffect(() => {
         fetchData();
         
-    }, [page]);
+    }, [page, updated]);
     useEffect(() => {
         companyFetchData();
-
-    }, [userData, page]);
+    }, [userData, page, updated]);
     return (<CompanyListPresenter
         workGroup = {workGroup}
         companyList = {companyList}

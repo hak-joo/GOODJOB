@@ -21,6 +21,9 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     text-align: center;
+    @media screen and (max-width: 768px) {
+        width: 90%;
+    }
 `;
 
 export const Logo = styled.div`
@@ -44,21 +47,3 @@ export const DescriptionArea = styled.div`
     font-size: 100%;
     font-weight: bold;
 `;
-
-export const LoginButton = styled.div`
-    flex: 0.5;
-    font-size: 100%;
-    font-weight: bold;
-    width: 65%;
-    background-color: #3cb371;
-    border-radius: 5px;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-self: center;
-    margin-bottom: 20px;
-    border: none;
-    cursor: pointer;
-`;
-

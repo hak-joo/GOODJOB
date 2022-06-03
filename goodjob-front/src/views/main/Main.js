@@ -31,7 +31,9 @@ const Main = ({ ...props }) => {
                 alert('잘못된 접근입니다.');
                 navigate('/');
             } finally {
+
                 if (res) {
+
                     if(res.data === ''){
                         alert('세션이 만료되어 로그아웃 되었습니다!');
                         navigate('/');
@@ -73,11 +75,11 @@ const Main = ({ ...props }) => {
             culture: Math.pow(2, Math.abs(userData.prefer.culture - 4)),
             task: Math.pow(2, Math.abs(userData.prefer.task - 4)),
 
-            ncommute: Math.pow(2, Math.abs(userData.prefer.commute - 3)),
-            npay: Math.pow(2, Math.abs(userData.prefer.pay - 3)),
-            nwelfare: Math.pow(2, Math.abs(userData.prefer.welfare - 3)),
-            nculture: Math.pow(2, Math.abs(userData.prefer.culture - 3)),
-            ntask: Math.pow(2, Math.abs(userData.prefer.task - 3)),
+            ncommute: Math.pow(2, Math.abs(userData.prefer.commute)),
+            npay: Math.pow(2, Math.abs(userData.prefer.pay)),
+            nwelfare: Math.pow(2, Math.abs(userData.prefer.welfare)),
+            nculture: Math.pow(2, Math.abs(userData.prefer.culture)),
+            ntask: Math.pow(2, Math.abs(userData.prefer.task)),
         };
 
         let res = null;
@@ -86,6 +88,7 @@ const Main = ({ ...props }) => {
 
         } catch (e) {
         } finally {
+            console.log('main Company fetchData', res);
             setCompanyList(res.data);
         }
     };

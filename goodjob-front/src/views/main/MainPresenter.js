@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import * as s from './MainStyled';
 import Slider from 'react-slick';
@@ -6,6 +6,19 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 const MainPresenter = ({ ...props }) => {
+    
+    const [width, setWidth] = useState(window.innerWidth);
+    const handleResize = () => {
+        setWidth(window.innerWidth);
+    };
+
+    useEffect(() => {
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
     function Arrow(props) {
         const { className, style, onClick } = props;
         return (
@@ -21,7 +34,7 @@ const MainPresenter = ({ ...props }) => {
         dots: true,
         infinite: true,
         speed: 500,
-        slidesToShow: 3,
+        slidesToShow: width > 1200 ? 3 : width > 550 ? 2 : 1,
         slidesToScroll: 1,
         arrows: true,
         centerMode: true,
@@ -29,6 +42,8 @@ const MainPresenter = ({ ...props }) => {
         prevArrow: <Arrow />,
     };
     const { userData, companyList } = props;
+
+
     return (
         <s.Container>
             <s.MainBlock>
@@ -85,6 +100,7 @@ const MainPresenter = ({ ...props }) => {
                             : null}
                     </Slider>
                 </s.MainCarousel>
+                {companyList.length < 0 ? <s.NoDataDescription>직군을 선택해주세요</s.NoDataDescription> : null}
             </s.MainBlock>
         </s.Container>
     );

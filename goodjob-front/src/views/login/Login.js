@@ -6,6 +6,7 @@ import * as c from '../../config/config';
 import { userApi } from '../../api/api';
 import * as recoilItem from '../../util/recoilItem';
 
+
 const LoginContainer = ({}) => {
     const navigate = useNavigate();
     const { naver } = window    ;
@@ -29,12 +30,11 @@ const LoginContainer = ({}) => {
             code: code,
             state: state,
         };
-        console.log(formData)
         try {
             res = await userApi.login(formData);
-            console.log(res);
         } catch (e) {
         } finally {
+
             if (res.status === 200) {
                 setToken(code);
                 setState(state);
@@ -58,6 +58,7 @@ const LoginContainer = ({}) => {
             res = await userApi.login(form);
 
             if (res) {
+
                 if (res.data === '') {
                     localStorage.clear();
                     return;

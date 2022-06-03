@@ -8,7 +8,7 @@ export const Container = styled.div`
     z-index: 99;
     position: relative;
     background-color: #222222;
-    height: 200px;
+    height: 300px;
 
     @media screen and (max-width: 1180px) {
         min-width: 100%;

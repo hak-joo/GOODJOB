@@ -14,7 +14,7 @@ const CompanyListPresenter = ({...props}) => {
                     <s.MainItem to={`/main`}>
                         <div>사용자 추천</div>
                     </s.MainItem>
-                    <s.MainItem to={`/main`}>
+                    <s.MainItem to={`/jobgroup`}>
                         <div>직군 비교</div>
                     </s.MainItem>
                     <s.MainItem

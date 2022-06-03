@@ -15,8 +15,7 @@ const LoginPresenter = ({...props}) => {
                     <br />
                     아래의 버튼을 눌러 로그인을 진행해주세요
                 </s.DescriptionArea>
-                
-                <div id='naverIdLogin' onClick={props.Login} style={{'marginBottom': '20px'}}/>
+                    <div id="naverIdLogin" onClick={props.Login} style={{ marginBottom: '20px' }} />
             </s.Container>
         </s.Wrapper>
     );

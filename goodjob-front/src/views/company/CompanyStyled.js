@@ -4,7 +4,7 @@ export const Container = styled.div`
     margin-top: 3rem;
     box-shadow: 0px 0px 10px #f3f6fb;
     margin-bottom: 300px;
-    height: 80%;
+    height: 85%;
     display: inline-block;
     background-color: white;
     width: 85%;
@@ -45,15 +45,17 @@ export const CompanyInfoArea = styled.div`
     color: #3cb371;
     display: flex;
     align-items: center;
-    background-color: #f5f5f5;
+    border-top: 1px dotted #3cb371;
+    border-bottom: 1px dotted #3cb371;
     padding-left: 20px;
     padding-right: 20px;
-    border-radius: 10px;
+
     cursor: pointer;
     &:hover {
-        background-color: #e2e2e2;
+        background-color: #f0f0f0;
         font-weight: bolder;
     }
+    margin-bottom: 10px;
 `;
 
 export const CompanyLinkText = styled.div`

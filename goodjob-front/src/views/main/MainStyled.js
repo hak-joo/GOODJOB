@@ -113,7 +113,8 @@ export const CardContent = styled.div`
     padding: 1rem;
     background-color: #3cb371;
     border-radius: 20px;
-    width: 100%;
+    /* width: 100%; */
+    width: 90%;
     height: 100%;
     color: white;
     &:hover {
@@ -147,4 +148,15 @@ export const SimilarityDes = styled.div`
 
 export const SimilarityNum = styled.div`
     font-size: 20px;
+`;
+
+export const NoDataDescription = styled.div`
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    color: #3cb371;
+    font-weight: bold;
 `;
