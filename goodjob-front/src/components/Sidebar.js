@@ -138,6 +138,9 @@ const Sidebar = ({ ...props }) => {
                 if (res.data === 'SUCCESS') {
                     alert('수정이 완료되었습니다');
                     setUpdated(updated + 1);
+                    if(window.innerWidth < 450){
+                        props.setNavVisible(false);
+                    }
                 } else {
                     alert('오류가 발생하였습니다');
                 }

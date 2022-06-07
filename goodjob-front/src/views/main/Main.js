@@ -88,7 +88,6 @@ const Main = ({ ...props }) => {
 
         } catch (e) {
         } finally {
-            console.log('main Company fetchData', res);
             setCompanyList(res.data);
         }
     };
