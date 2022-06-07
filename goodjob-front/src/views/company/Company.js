@@ -38,7 +38,12 @@ const Company = ({...props}) => {
             });
             return;
         } else{
-            navigate(`/list/${page}`);
+            if(page){
+                navigate(`/list/${page}`);
+            } else{
+                navigate(`/main`);
+            }
+            
         }
         
     };
