@@ -36,7 +36,7 @@ const MainPresenter = ({ ...props }) => {
         speed: 500,
         slidesToShow: width > 1200 ? 3 : width > 550 ? 2 : 1,
         slidesToScroll: 1,
-        arrows: true,
+        arrows: width >500 ? true : false,
         centerMode: true,
         nextArrow: <Arrow />,
         prevArrow: <Arrow />,
@@ -90,7 +90,7 @@ const MainPresenter = ({ ...props }) => {
                                                   <s.CompanyName>{company.name}</s.CompanyName>
                                                   <s.Similarity>
                                                       <s.SimilarityDes>적합도</s.SimilarityDes>
-                                                      <s.SimilarityNum>{Math.floor(company.simillarity * 50)}%</s.SimilarityNum>
+                                                      <s.SimilarityNum>{Math.floor(company.simillarity * 100)}%</s.SimilarityNum>
                                                   </s.Similarity>
                                               </s.CardContent>
                                           </Link>
@@ -100,7 +100,9 @@ const MainPresenter = ({ ...props }) => {
                             : null}
                     </Slider>
                 </s.MainCarousel>
-                {companyList.length < 0 ? <s.NoDataDescription>직군을 선택해주세요</s.NoDataDescription> : null}
+                {companyList.length <= 0 ? (
+                    <s.NoDataDescription>직군을 선택해주세요</s.NoDataDescription>
+                ) : null}
             </s.MainBlock>
         </s.Container>
     );

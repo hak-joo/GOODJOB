@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import * as s from './HeaderStyled';
 import { AiOutlineMenu } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
@@ -29,7 +29,7 @@ const Header = ({ ...props }) => {
         <s.Container>
             {props.NavVisible ? null : (
                 <s.NavIconArea onMouseOver={() => onMouseOverNav()} onMouseOut={() => onMouseOutNav()} onClick={() => props.onClickMenu()}>
-                    <AiOutlineMenu size={50} cursor={'pointer'} color={navColor} />
+                    <AiOutlineMenu size={window.innerWidth > 500 ? 50 : 30} cursor={'pointer'} color={navColor} />
                 </s.NavIconArea>
             )}
 

@@ -12,6 +12,9 @@ export const Container = styled.div`
         min-width: 80%;
     }
     overflow: scroll;
+    @media screen and (max-width: 500px) {
+        width: 100%;
+    }
 `;
 
 export const MainBlock = styled.div`

@@ -13,6 +13,9 @@ export const Container = styled.div`
     @media screen and (min-width: 1180px) {
         min-width: 80%;
     }
+    @media screen and (max-width: 500px) {
+        width: 100%;
+    }
 `;
 
 export const MainBlock = styled.div`
