@@ -56,22 +56,6 @@ const SearchContainer = ({ ...props }) => {
     const companyFetchData = async () => {
         if (userData == null) return;
         if ((keyword === "" || keyword === "none") && (jobGroup === "미정" || jobGroup === "")) return;
-        // const formData = {
-        //     job_group: jobGroup === '미정' ? '' : jobGroup,
-        //     page: page,
-        //     name: keyword,
-        //     commute: Math.pow(2, Math.abs(userData.prefer.commute - 4)),
-        //     pay: Math.pow(2, Math.abs(userData.prefer.pay - 4)),
-        //     welfare: Math.pow(2, Math.abs(userData.prefer.welfare - 4)),
-        //     culture: Math.pow(2, Math.abs(userData.prefer.culture - 4)),
-        //     task: Math.pow(2, Math.abs(userData.prefer.task - 4)),
-
-        //     ncommute: Math.pow(2, Math.abs(userData.prefer.commute)),
-        //     npay: Math.pow(2, Math.abs(userData.prefer.pay)),
-        //     nwelfare: Math.pow(2, Math.abs(userData.prefer.welfare)),
-        //     nculture: Math.pow(2, Math.abs(userData.prefer.culture)),
-        //     ntask: Math.pow(2, Math.abs(userData.prefer.task)),
-        // };
 
         const formData = {
             job_group: jobGroup === '미정' ? '' : jobGroup,
