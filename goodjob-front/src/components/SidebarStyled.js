@@ -4,12 +4,12 @@ import styled from 'styled-components';
 export const DropDownMenuCorp = styled.div`
     background-color: white;
     height: 100%;
-    min-width: 300px;
+    min-width: 310px;
     min-height: 600px;
 
     display: inline-block;
-    
-    margin-left: ${(props) => (props.NavVisible ? '0' : '-300px')};
+
+    margin-left: ${(props) => (props.NavVisible ? '0' : '-310px')};
     font-size: 18px;
     // margin-left:20px;
     color: #000000;
@@ -24,6 +24,7 @@ export const DropDownMenuCorp = styled.div`
         min-width: 100%;
         margin-left: ${(props) => (props.NavVisible ? '0' : '-100%')};
     }
+
 `;
 
 export const SideTopPadding = styled.div`
@@ -147,16 +148,21 @@ export const PreferItemWrapper = styled.div`
 export const PreferItem = styled.div`
     padding-top: 20px;
     display: flex;
+    padding-bottom:20px;
+    border-bottom: 1px solid #e2e2e2;
 `;
 export const PreferIndex = styled.div`
     flex:0.5;
     text-align: right;
 `;
 export const PreferName = styled.div`
-    flex: 1;
+    flex: 0.7;
     text-align: center;
 `;
-
+export const PreferValue = styled.div`
+    flex: 0.5;
+    text-align: center;
+`;
 export const PreferDownButton = styled.div`
     flex: 0.5;
     cursor: pointer;

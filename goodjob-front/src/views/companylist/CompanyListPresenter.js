@@ -2,7 +2,7 @@ import React from 'react';
 import * as s from './CompanyListStyled';
 import {BsArrowLeftCircle} from 'react-icons/bs';
 import { BsArrowRightCircle } from 'react-icons/bs';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const CompanyListPresenter = ({...props}) => {
     const {companyList, page, totalPage, workGroup} = props;
@@ -52,7 +52,7 @@ const CompanyListPresenter = ({...props}) => {
                                   >
                                       <s.CompanyTitle>{item.name}</s.CompanyTitle>
                                       <s.WorkGroup>{item.job_group}</s.WorkGroup>
-                                      <s.FitRate>{Math.floor(item.simillarity * 50)}</s.FitRate>
+                                      <s.FitRate>{Math.floor(item.simillarity * 100)}</s.FitRate>
                                   </s.ListItem>
                               ))
                             : null}

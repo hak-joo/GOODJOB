@@ -29,34 +29,15 @@ const Main = ({ ...props }) => {
                 res = await userApi.getUser(formData);
             } catch (e) {
                 alert('잘못된 접근입니다.');
-                navigate('/');
+                window.location.href = '/';
             } finally {
-
                 if (res) {
-
                     if(res.data === ''){
                         alert('세션이 만료되어 로그아웃 되었습니다!');
-                        navigate('/');
+                        window.location.href = '/';
+                        return;
                     }
                     setUserData(res.data);
-                    if (res.data.prefer.culture + res.data.prefer.pay === 0) {
-                        setPreferList([
-                            { title: '문화', rank: 0, name: 'culture' },
-                            { title: '급여', rank: 1, name: 'pay' },
-                            { title: '업무강도', rank: 2, name: 'task' },
-                            { title: '복지', rank: 3, name: 'welfare' },
-                            { title: '출퇴근', rank: 4, name: 'commute' },
-                        ]);
-                    } else {
-                        setPreferList([
-                            { title: '문화', rank: res.data.prefer.culture, name: 'culture' },
-                            { title: '급여', rank: res.data.prefer.pay, name: 'pay' },
-                            { title: '업무강도', rank: res.data.prefer.task, name: 'task' },
-                            { title: '복지', rank: res.data.prefer.welfare, name: 'welfare' },
-                            { title: '출퇴근', rank: res.data.prefer.commute, name: 'commute' },
-                        ]);
-                        preferList.sort();
-                    }
                 }
             }
         }
@@ -69,17 +50,18 @@ const Main = ({ ...props }) => {
 
         const formData = {
             job_group: userData.job_group,
-            commute: Math.pow(2, Math.abs(userData.prefer.commute - 4)),
-            pay: Math.pow(2, Math.abs(userData.prefer.pay - 4)),
-            welfare: Math.pow(2, Math.abs(userData.prefer.welfare - 4)),
-            culture: Math.pow(2, Math.abs(userData.prefer.culture - 4)),
-            task: Math.pow(2, Math.abs(userData.prefer.task - 4)),
 
-            ncommute: Math.pow(2, Math.abs(userData.prefer.commute)),
-            npay: Math.pow(2, Math.abs(userData.prefer.pay)),
-            nwelfare: Math.pow(2, Math.abs(userData.prefer.welfare)),
-            nculture: Math.pow(2, Math.abs(userData.prefer.culture)),
-            ntask: Math.pow(2, Math.abs(userData.prefer.task)),
+            commute: userData.prefer.commute,
+            pay: userData.prefer.pay,
+            welfare: userData.prefer.welfare,
+            culture: userData.prefer.culture,
+            task: userData.prefer.task,
+
+            nCommute: userData.prefer.commute * -1,
+            nPay: userData.prefer.pay * -1,
+            nWelfare: userData.prefer.welfare * -1,
+            nCulture: userData.prefer.culture * -1,
+            nTask: userData.prefer.task * -1,
         };
 
         let res = null;
@@ -94,7 +76,7 @@ const Main = ({ ...props }) => {
 
     useEffect(() => {
         if (token === '' || token === null || state === '' || state === null) {
-            navigate('/');
+            window.location.href = '/';
         }
         fetchData();
     }, []);

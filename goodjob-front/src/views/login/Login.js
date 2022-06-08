@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { useLocation, useNavigate } from 'react-router-dom';
 import LoginPresenter from './LoginPresenter';
@@ -9,7 +9,7 @@ import * as recoilItem from '../../util/recoilItem';
 
 const LoginContainer = ({}) => {
     const navigate = useNavigate();
-    const { naver } = window    ;
+    const { naver } = window;
 
     const [token, setToken] = useRecoilState(recoilItem.access_token);
     const [state, setState] = useRecoilState(recoilItem.state_token);

@@ -77,7 +77,7 @@ const SearchPresenter = ({ ...props }) => {
                                     >
                                         <s.CompanyTitle>{item.name}</s.CompanyTitle>
                                         <s.WorkGroup>{item.job_group}</s.WorkGroup>
-                                        <s.FitRate>{Math.floor(item.simillarity * 50)}</s.FitRate>
+                                        <s.FitRate>{Math.floor(item.simillarity * 100)}</s.FitRate>
                                     </s.ListItem>
                                 ))
                             )
