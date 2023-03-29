@@ -1,0 +1,18 @@
+.goodjob-wrapper {
+  min-height: 100vh;
+  background-color: white;
+  display: flex;
+}
+
+.goodjob-container {
+  display: flex;
+}
+
+.goodjob-card {
+  flex: 1;
+  background-color: green;
+  height: auto;
+  margin: 5%;
+  border-radius: 10px;
+  padding: 10px;
+}
