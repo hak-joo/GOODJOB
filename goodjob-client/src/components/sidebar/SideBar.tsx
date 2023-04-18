@@ -2,13 +2,13 @@ import React from "react";
 import "./index.scss";
 
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../store";
-import { toggleSidebar } from "../../store/reducers/sidebar";
+import { AppDispatch, RootState } from "@/store";
+import { toggleSidebar } from "@/store/reducers/sidebar";
 
 import { HiUserCircle } from "react-icons/hi";
 
 import { MdOutlineNavigateBefore, MdThumbUp } from "react-icons/md";
-import { routes } from "../../Router";
+import { routes } from "@/Router";
 import { Navigate, useNavigate } from "react-router-dom";
 
 const SideBar = () => {

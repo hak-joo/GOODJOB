@@ -3,10 +3,12 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 export interface SidebarState {
   isOpen: boolean;
+  current: string;
 }
 
 const initialState: SidebarState = {
   isOpen: true,
+  current: "",
 };
 
 export const sidebarSlice = createSlice({

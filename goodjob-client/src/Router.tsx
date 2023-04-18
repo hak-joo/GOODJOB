@@ -1,15 +1,19 @@
+import React, { createContext, useContext } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import SideBar from "./components/sidebar/SideBar";
-import Home from "./containers/home/HomeContainer";
-import Company from "./containers/company/CompanyContainer";
-import Search from "./containers/search/SearchContainer";
-import WorkGroup from "./containers/workgroup/WorkGroupContainer";
+
+import SideBar from "@components/sidebar/SideBar";
+
+import Home from "@/views/home/HomeContainer";
+import Company from "@/views/company/CompanyContainer";
 
 import { IconType } from "react-icons";
 import { AiFillHome } from "react-icons/ai";
 import { HiUserGroup } from "react-icons/hi";
 import { FaSearch } from "react-icons/fa";
 import { MdWorkspacesFilled } from "react-icons/md";
+import Login from "./views/login/LoginContainer";
+import { ViewCardContext } from "./context";
+import Register from "./views/register/Register";
 
 interface RouteType {
   path: string;
@@ -31,18 +35,6 @@ export const routes: RouteType[] = [
     element: <Company />,
     icon: HiUserGroup,
   },
-  {
-    path: "/search",
-    name: "Search",
-    element: <Search />,
-    icon: FaSearch,
-  },
-  {
-    path: "/workgroup",
-    name: "WorkGroup",
-    element: <WorkGroup />,
-    icon: MdWorkspacesFilled,
-  },
 ];
 
 export default () => {
@@ -55,6 +47,8 @@ export default () => {
             {routes.map((route) => {
               return <Route path={route.path} element={route.element} />;
             })}
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
           </Routes>
         </div>
       </div>

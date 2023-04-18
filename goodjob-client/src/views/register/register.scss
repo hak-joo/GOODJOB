@@ -1,0 +1,13 @@
+.register {
+  &-container {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    width: 50%;
+  }
+  &-title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+  }
+}
